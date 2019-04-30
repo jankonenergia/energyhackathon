@@ -11,7 +11,7 @@ const server = new ApolloServer({
     const bearerToken = req.headers.authorization ? req.headers.authorization.replace('Bearer ', '') : null
     if (bearerToken) {
         const payload = await util.promisify(jwt.verify)(bearerToken, 'jankonenergia') //TODO: Move to env variable
-        return { user: payload.user }
+        return { user: payload }
     }
     return null
   } 
