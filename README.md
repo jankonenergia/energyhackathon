@@ -5,6 +5,18 @@
 
 ### Installing from source
 
+#### Frontend
+Go to the frontend -folder and:
+1) Install dependencies by running ```npm install````
+2) Start by running ```npm start````
+Backend should start into localhost:3000
+
+#### Backend
+Go to the backend -folder and:
+1) Install dependencies by running ```npm install````
+2) Start by running ```npm start````
+Backend should start into localhost:4000
+
 ## Semi-important dev-docs
 
 ### JWT Token
