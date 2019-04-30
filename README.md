@@ -21,3 +21,5 @@ This resolves as:
       "lastName": "Jankko",
       "email": "asia.kunnossa@jankko.energy"
 ```
+
+if you want to create a new token, just use ```jankonenergia``` as the secret (suprise suprise! - well at the least for now)
