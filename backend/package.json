@@ -22,6 +22,8 @@
     "babel-preset-es2015": "^6.24.1"
   },
   "dependencies": {
-    "apollo-server": "^2.4.8"
+    "apollo-server": "^2.4.8",
+    "jsonwebtoken": "^8.5.1",
+    "util": "^0.11.1"
   }
 }
