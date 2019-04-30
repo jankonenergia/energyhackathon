@@ -1,2 +1,2 @@
 #!/bin/bash
-ssh "$SERVER_USERNAME"@jankon.energy 'ls -l'
+ssh -i jankonenergia.enc $SERVER_USERNAME@jankon.energy 'docker service update --image jankonenergia/backend:latest jankonenergia_backend'

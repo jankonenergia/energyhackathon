@@ -5,6 +5,9 @@ env:
   - secure: QEGdvwtZhookns50PUWaXZB0xPGnxp4g/VC2/S/7rLG2WYtmkoU4OmnM1KfHcDSRnxd9p9V8VWlvEYZZ7ElRF18KMQy+Eq6PBzul4x0qdwtRPKA1CQ1hth8yTUO204rXFP6IMAX+FzUcRmBtkvcpuzfr5Kxc5TTKmOaUApjOMVxU0httRxvCmWCFxKmOdNPgeB4+qUtNjQOQ9IRXyHYGmIQLcSAhgwdT9A9htqAHB0CrE2Pb/Kv5GNo+b2LpewgYwu1PXvOfbrIeJoP3DwWJYAjJ0nYdFkmsRuWLS1tHxPmfpQHoJdmIEYYqv8laVRQV+H+5rtQuSSFqAFcKWdTzTSTgeOtnJIluOR4ioB/Md+JLPDNH1RiL4KlCkGlerT/lr7oWCe2gTIy4/4hjQtTSQAp4Rc+Pl/E12VuwLbGFy2FLIt6pv3xgJ+FIDEKLYzws9Z0kWypMA9EQs/VxPnmEYFoyPoU/mFtUL9qcfhbla1Nx+TCYUZ5sbdjt/h2hLPA0aJhMGcBUOZZjaedBkg/dUJD/78c1YrAKlmGjnKYmpWz+nbSSwSgWvH5ChjF5GLIj+SX/4KC9/5Yab0qRMvaJ0n7tZhk6y0Zk9jdLfg1bIS+Te1HzEL0c8MBpDU1SbUfQ7BYgA3ppVuR2CVHLF3Nrv1Uu6QM31U+4l7scUd1rL5A=
 node_js:
 - 11.10.0
+before_install:
+- openssl aes-256-cbc -K $encrypted_5122d9ef9a02_key -iv $encrypted_5122d9ef9a02_iv
+  -in deploy_rsa.enc -out deploy_rsa -d
 install:
 - cd frontend && npm install
 - cd backend && npm install
@@ -17,9 +20,6 @@ deploy:
   on:
     branch: master
 - provider: script
-  script: bash scripts/deploy.sh production
+  script: bash scripts/deploy
   on:
     branch: master
-before_install:
-- openssl aes-256-cbc -K $encrypted_5122d9ef9a02_key -iv $encrypted_5122d9ef9a02_iv
-  -in jankonenergia.enc -out jankonenergia -d
