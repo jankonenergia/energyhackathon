@@ -1,0 +1,103 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:cypress/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "import",
+    "babel"
+  ],
+  "settings": {
+    "import/resolver": "webpack",
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "16.5.2"
+    }
+  },
+  "rules": {
+    "arrow-body-style": ["error", "as-needed"],
+    "react/no-array-index-key": 0,
+    "react/no-deprecated": 2,
+    "react/no-direct-mutation-state": 2,
+    "react/no-unused-prop-types": 2,
+    "react/prefer-es6-class": 2,
+    "react/prefer-stateless-function": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/jsx-uses-vars": 2,
+    "react/jsx-uses-react": 2,
+    "react/jsx-closing-bracket-location": [2, "tag-aligned"],
+    "react/jsx-key": 1,
+    "react/jsx-max-props-per-line": [2, {"maximum": 1, "when": "multiline"}],
+    "import/first": 2,
+    "import/order": ["error", {"newlines-between": "never"}],
+    "import/no-duplicates": 2,
+    "import/newline-after-import": 2,
+    "import/no-unassigned-import": 2,
+    "import/no-unresolved": 2,
+    "import/export": 2,
+    "import/no-extraneous-dependencies": 2,
+    "import/no-mutable-exports": 2,
+    "import/named": 2,
+    "import/default": 2,
+    "import/namespace": 2,
+    "import/no-absolute-path": 2,
+    "import/no-dynamic-require": 2,
+    "import/no-webpack-loader-syntax": 2,
+    "import/no-self-import": 2,
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1,
+        "flatTernaryExpressions": true
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "styles"
+      }
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
+    // redux-saga watchers are wrapped in while(true) -loops
+    "no-constant-condition": [
+      "error",
+      {"checkLoops": false}
+    ],
+    "babel/object-curly-spacing": 2,
+    "semi": [
+      "error",
+      "never"
+    ],
+    "comma-dangle": ["error", "never"],
+    "max-len": ["error", { "code": 120, "tabWidth": 2, "ignoreUrls": true, "ignoreStrings": true}],
+    "no-console": 0
+  }
+}
