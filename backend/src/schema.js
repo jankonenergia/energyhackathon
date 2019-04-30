@@ -26,7 +26,8 @@ const typeDefs = gql`
     user(id: String): User
     users: [User],
     me: User,
-    energyMeasurements(email: String!, from: Date, to: Date): [EnergyMeasurement]
+    energyMeasurements(email: String!, from: Date, to: Date): [EnergyMeasurement],
+    serverInfo: ServerInfo
   },
 
   type User {
@@ -43,6 +44,10 @@ const typeDefs = gql`
       reading: Float,
       from: User
   },
+
+  type ServetInfo {
+      info
+  }
 
   """
   Custom type for dates

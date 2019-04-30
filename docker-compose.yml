@@ -1,0 +1,12 @@
+version: '3.2'
+
+services:
+  backend:
+    image: jankonenergia/backend
+    ports:
+      - "4000:4000"
+      
+  frontend:
+    image: jankonenergia/frontend
+    ports:
+      - "3000:3000"

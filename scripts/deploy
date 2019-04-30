@@ -1,0 +1,2 @@
+#!/bin/bash
+ssh "$SERVER_USERNAME"@jankon.energy 'ls -l'

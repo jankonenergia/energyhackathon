@@ -1,1 +1,25 @@
 sudo: required
+env:
+  global:
+  - secure: BonkEHaR/Vv0mg/lUuo4KU2osvl0BK6C2E9tAJ7uTDvcDm0G6K90cVJyu+j6KHLOnMBqcqmNuyZ9EddZFJhGHinYScp0zNbaXsJtndTNgkY+5GpTTP+qYA/UQiCkg4Aok3IwcDWptu1+MP8TPwBDpF5APxQts0HVFVzhqeBwI10RXrUNUy5FmPvTOO3qU6FRpwqmh1Fxu5AerLSNVYUt2tWUMz7E8x2JvIYOSoWC9xPRrBvwnPCVSIZk+sFEglv9tkSRFT7TkUoEKUurvCOO2waZN1RNZWvUXEm1dAa8kJ2FISOPkhYUo6g+BycGBSPK7gf65FOgxf4BNsklNeaE43XG6MimygpKd6pNUmlZTmqLMS7JNFiSbn3X2fbcNgElbxpObpQlPLE0u4TIMnvFTFM80q7eDAQ24s7wHKqtyMtKSqsx9OtVWMQMREjvTYVzCFTPis76CI5SUNkTrQGPgl4tiOU70RyswzkffXzlvTc2cmGKVeLTKd7hmqdFbYTCvYxxkf+InVy6UPpLvoerF0xNLPHY096sZqEaksSRLwZ84BgjLkNNH9HyxdkgclZnJ49t3J+2Bvx+07WYJqjrsS9ccjes5pyx2Tdzyh7d5l9SBSQ7UAzMlyJlU8ZMdQ50BPTkzHoyyP9qcusoxSF6Ea7aZJDZz90mx3cH64dfK8o=
+  - secure: QEGdvwtZhookns50PUWaXZB0xPGnxp4g/VC2/S/7rLG2WYtmkoU4OmnM1KfHcDSRnxd9p9V8VWlvEYZZ7ElRF18KMQy+Eq6PBzul4x0qdwtRPKA1CQ1hth8yTUO204rXFP6IMAX+FzUcRmBtkvcpuzfr5Kxc5TTKmOaUApjOMVxU0httRxvCmWCFxKmOdNPgeB4+qUtNjQOQ9IRXyHYGmIQLcSAhgwdT9A9htqAHB0CrE2Pb/Kv5GNo+b2LpewgYwu1PXvOfbrIeJoP3DwWJYAjJ0nYdFkmsRuWLS1tHxPmfpQHoJdmIEYYqv8laVRQV+H+5rtQuSSFqAFcKWdTzTSTgeOtnJIluOR4ioB/Md+JLPDNH1RiL4KlCkGlerT/lr7oWCe2gTIy4/4hjQtTSQAp4Rc+Pl/E12VuwLbGFy2FLIt6pv3xgJ+FIDEKLYzws9Z0kWypMA9EQs/VxPnmEYFoyPoU/mFtUL9qcfhbla1Nx+TCYUZ5sbdjt/h2hLPA0aJhMGcBUOZZjaedBkg/dUJD/78c1YrAKlmGjnKYmpWz+nbSSwSgWvH5ChjF5GLIj+SX/4KC9/5Yab0qRMvaJ0n7tZhk6y0Zk9jdLfg1bIS+Te1HzEL0c8MBpDU1SbUfQ7BYgA3ppVuR2CVHLF3Nrv1Uu6QM31U+4l7scUd1rL5A=
+node_js:
+- 11.10.0
+install:
+- cd frontend && npm install
+- cd backend && npm install
+after_success:
+- cd frontend && docker build -t jankonenergia/frontend .
+- cd backend && docker build -t jankonenergia/backend .
+deploy:
+- provider: script
+  script: bash scripts/docker_push
+  on:
+    branch: master
+- provider: script
+  script: bash scripts/deploy.sh production
+  on:
+    branch: master
+before_install:
+- openssl aes-256-cbc -K $encrypted_5122d9ef9a02_key -iv $encrypted_5122d9ef9a02_iv
+  -in jankonenergia.enc -out jankonenergia -d
