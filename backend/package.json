@@ -4,7 +4,8 @@
   "description": "Backend for Jankon Energia",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/jankonenergia/energyhackathon/issues"
   },
-  "homepage": "https://github.com/jankonenergia/energyhackathon#readme"
+  "homepage": "https://github.com/jankonenergia/energyhackathon#readme",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "dependencies": {
+    "apollo-server": "^2.4.8"
+  }
 }
