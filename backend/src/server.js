@@ -14,9 +14,7 @@ const server = new ApolloServer({
         const payload = await util.promisify(jwt.verify)(bearerToken, 'jankonenergia') //TODO: Move to env variable
         return { user: payload }
     }
-    if (!bearerToken) 
-      throw new AuthorizationError('You must be logged in')
-
+    
     return null
   } 
 })

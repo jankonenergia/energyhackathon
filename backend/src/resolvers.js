@@ -1,10 +1,25 @@
 const resolvers = {
     Query: {
-      user: (obj, args) => {},
-      users: () => {},
+      user: (obj, args) => {
+        if (!context.user) return null
+
+        return null //TODO: to be changed
+      },
+      users: () => {
+        if (!context.user) return []
+
+        return null //TODO: to be changed
+      },
       me: (obj, args, context, info) => context.user,
-      energyMeasurements: (obj, args, context, info) => {},
-      serverInfo: () => { return { buildNumber: process.env.VERSION, commitMessage: process.env.COMMIT_MESSAGE, commit: process.env.COMMIT}}
+      energyMeasurements: (obj, args, context, info) => {
+        if (!context.user) return []
+
+        return null //TODO: to be changed
+      },
+      serverInfo: () => { 
+        if (!context.user) return null
+        return { buildNumber: process.env.VERSION, commitMessage: process.env.COMMIT_MESSAGE, commit: process.env.COMMIT}
+      }
     },
     Mutation: {
       createUser: (obj, args) => {},
