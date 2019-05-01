@@ -22,11 +22,8 @@ script:
 after_success:
 - cd $TRAVIS_BUILD_DIR/frontend && docker build -t jankonenergia/frontend .
 - cd $TRAVIS_BUILD_DIR/backend && docker build -t jankonenergia/backend .
+- chmod +x $TRAVIS_BUILD_DIR/docker_push.sh && bash $TRAVIS_BUILD_DIR/docker_push.sh
 deploy:
-- provider: script
-  script: chmod +x docker_push.sh && bash docker_push.sh
-  on:
-    branch: master
 - provider: script
   script: chmod +x deploy.sh && bash deploy.sh
   on:
