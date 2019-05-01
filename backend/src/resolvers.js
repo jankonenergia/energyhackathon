@@ -1,11 +1,11 @@
 const resolvers = {
     Query: {
-      user: (obj, args) => {
+      user: (obj, args, context) => {
         if (!context.user) return null
 
         return null //TODO: to be changed
       },
-      users: () => {
+      users: (obj, args, context) => {
         if (!context.user) return []
 
         return null //TODO: to be changed
@@ -16,7 +16,7 @@ const resolvers = {
 
         return null //TODO: to be changed
       },
-      serverInfo: () => { 
+      serverInfo: (obj, args, context) => { 
         if (!context.user) return null
         return { buildNumber: process.env.VERSION, commitMessage: process.env.COMMIT_MESSAGE, commit: process.env.COMMIT}
       }
