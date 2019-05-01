@@ -23,7 +23,6 @@ after_success:
 - cd $TRAVIS_BUILD_DIR/frontend && docker build -t jankonenergia/frontend .
 - cd $TRAVIS_BUILD_DIR/backend && docker build -t jankonenergia/backend .
 deploy:
-- skip-cleanup: true
 - provider: script
   script: chmod +x ./deploy.sh && ./deploy.sh
   on:
