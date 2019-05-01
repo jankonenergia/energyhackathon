@@ -9,8 +9,7 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_5122d9ef9a02_key -iv $encrypted_5122d9ef9a02_iv
   -in deploy_rsa.enc -out deploy_rsa -d
 install:
-- cd frontend && npm install
-- cd backend && npm install
+  script: scripts/build
 after_success:
 - cd frontend && docker build -t jankonenergia/frontend .
 - cd backend && docker build -t jankonenergia/backend .
