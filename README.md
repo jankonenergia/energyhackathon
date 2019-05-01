@@ -7,7 +7,7 @@
 1) Install docker if you havent already (https://docs.docker.com/install/)
 2) Install docker-compose (https://docs.docker.com/compose/install/)
 4) clone this repo
-5) Edit the mongodb username and password on the ```docker-compose.yml`` on project root
+5) Edit the mongodb username and password on the ```docker-compose.yml``` on project root
 6) Run ```docker-compose up -d```
 (-d starts the stack on the background. Without it, it's just a console app)
 
