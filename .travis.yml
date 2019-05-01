@@ -18,16 +18,16 @@ install:
 - cd $TRAVIS_BUILD_DIR/frontend && npm install
 - cd $TRAVIS_BUILD_DIR/backend && npm install
 script:
-- echo "skipping tests"
+- echo "skipping tests for now"
 after_success:
 - cd $TRAVIS_BUILD_DIR/frontend && docker build -t jankonenergia/frontend .
 - cd $TRAVIS_BUILD_DIR/backend && docker build -t jankonenergia/backend .
 deploy:
 - provider: script
-  script: bash TRAVIS_BUILD_DIR/scripts/docker_push
+  script: bash docker_push
   on:
     branch: master
 - provider: script
-  script: bash TRAVIS_BUILD_DIR/scripts/deploy
+  script: bash deploy
   on:
     branch: master
