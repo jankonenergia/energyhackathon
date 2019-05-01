@@ -45,8 +45,9 @@ const typeDefs = gql`
       from: User
   },
 
-  type ServetInfo {
-      info
+  type ServerInfo {
+      buildNumber: String,
+      commitMessage: String
   }
 
   """
