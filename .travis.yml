@@ -24,6 +24,10 @@ after_success:
 - cd $TRAVIS_BUILD_DIR/backend && docker build -t jankonenergia/backend .
 deploy:
 - provider: script
-  script: chmod +x ./deploy.sh && ./deploy.sh
+  script: chmod +x docker_push.sh && bash docker_push.sh
+  on:
+    branch: master
+- provider: script
+  script: chmod +x deploy.sh && bash deploy.sh
   on:
     branch: master
