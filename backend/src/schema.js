@@ -47,7 +47,8 @@ const typeDefs = gql`
 
   type ServerInfo {
       buildNumber: String,
-      commitMessage: String
+      commitMessage: String,
+      commit: String
   }
 
   """

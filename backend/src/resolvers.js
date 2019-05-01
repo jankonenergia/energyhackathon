@@ -4,7 +4,7 @@ const resolvers = {
       users: () => {},
       me: (obj, args, context, info) => context.user,
       energyMeasurements: (obj, args, context, info) => {},
-      serverInfo: () => { return { buildNumber: process.env.TRAVIS_BUILD_NUMBER, commitMessage: process.env.TRAVIS_COMMIT_MESSAGE}}
+      serverInfo: () => { return { buildNumber: process.env.VERSION, commitMessage: process.env.COMMIT_MESSAGE, commit: process.env.COMMIT}}
     },
     Mutation: {
       createUser: (obj, args) => {},
