@@ -22,13 +22,12 @@ script:
 after_success:
 - cd $TRAVIS_BUILD_DIR/frontend && docker build -t jankonenergia/frontend .
 - cd $TRAVIS_BUILD_DIR/backend && docker build -t jankonenergia/backend .
-before_deploy:
-- provider: script
-  script: bash docker_push
-  on:
-    branch: master
 deploy:
 - provider: script
-  script: bash deploy
+  script: "./docker_push.sh"
+  on:
+    branch: master
+- provider: script
+  script: "./deploy.sh"
   on:
     branch: master
