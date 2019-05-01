@@ -25,10 +25,6 @@ after_success:
 deploy:
 - skip-cleanup: true
 - provider: script
-  script: chmod +x ./docker_push.sh && ./docker_push.sh
-  on:
-    branch: master
-- provider: script
   script: chmod +x ./deploy.sh && ./deploy.sh
   on:
     branch: master
