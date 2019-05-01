@@ -22,13 +22,16 @@ script:
 after_success:
 - cd $TRAVIS_BUILD_DIR/frontend && docker build -t jankonenergia/frontend .
 - cd $TRAVIS_BUILD_DIR/backend && docker build -t jankonenergia/backend .
+before_deploy:
+- chmod +x ./deploy.sh
+- chmod +x ./docker_push.sh
 deploy:
 - skip-cleanup: true
 - provider: script
-  script: "chmod +x ./docker_push.sh && ./docker_push.sh"
+  script: bash docker_push.sh
   on:
     branch: master
 - provider: script
-  script: "chmod +x ./deploy.sh && ./deploy.sh"
+  script: bash deploy.sh
   on:
     branch: master
