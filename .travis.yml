@@ -9,16 +9,17 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_5122d9ef9a02_key -iv $encrypted_5122d9ef9a02_iv
   -in deploy_rsa.enc -out deploy_rsa -d
 install:
-  script: scripts/build
+- cd $TRAVIS_BUILD_DIR/frontend && npm install
+- cd $TRAVIS_BUILD_DIR/backend && npm install
 after_success:
-- cd frontend && docker build -t jankonenergia/frontend .
-- cd backend && docker build -t jankonenergia/backend .
+- cd $TRAVIS_BUILD_DIR/frontend && docker build -t jankonenergia/frontend .
+- cd $TRAVIS_BUILD_DIR/backend && docker build -t jankonenergia/backend .
 deploy:
 - provider: script
-  script: bash scripts/docker_push
+  script: bash TRAVIS_BUILD_DIR/scripts/docker_push
   on:
     branch: master
 - provider: script
-  script: bash scripts/deploy
+  script: bash TRAVIS_BUILD_DIR/scripts/deploy
   on:
     branch: master
