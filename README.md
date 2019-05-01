@@ -17,6 +17,33 @@ To stop, either close the running console app (if you started without -d) or typ
 
 ### GraphQL
 
+#### deployment info
+
+you can check the deployment info with a query
+```
+query {
+  serverInfo {
+    commitMessage
+    commit
+    buildNumber
+  }
+}
+
+```
+this returns the server server info, ex
+```
+{
+  "data": {
+    "serverInfo": {
+      "commitMessage": "added missing context",
+      "commit": "e95c77f265c370cbd47f97a11f6a17e2b9bf481d",
+      "buildNumber": "46"
+    }
+  }
+}
+```
+
+#### I'm getting null's and empty lists
 Did you receive a null or an empty list?
 Should there be data?
 
