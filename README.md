@@ -1,23 +1,26 @@
 # Jankon Energia
 
 ## Installing 
-### Installing via docker
 
-### Installing from source
+### Installing via docker compose
 
-#### Frontend
-Go to the frontend -folder and:
-1) Install dependencies by running ```npm install````
-2) Start by running ```npm start````
-Backend should start into localhost:3000
+1) Install docker if you havent already (https://docs.docker.com/install/)
+2) Install docker-compose (https://docs.docker.com/compose/install/)
+4) clone this repo
+5) Edit the mongodb username and password on the ```docker-compose.yml`` on project root
+6) Run ```docker-compose up -d```
+(-d starts the stack on the background. Without it, it's just a console app)
 
-#### Backend
-Go to the backend -folder and:
-1) Install dependencies by running ```npm install````
-2) Start by running ```npm start````
-Backend should start into localhost:4000
+To stop, either close the running console app (if you started without -d) or type ```docker-compose down```
 
 ## Semi-important dev-docs
+
+### GraphQL
+
+Did you receive a null or an empty list?
+Should there be data?
+
+My quess would be, that you are missing the bearer token. See more below 
 
 ### JWT Token
 jwt token for testing, use

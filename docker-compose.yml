@@ -5,8 +5,28 @@ services:
     image: jankonenergia/backend
     ports:
       - "4000:4000"
+    environment: 
+      - MONGODB_USER=[ Your username ]
+      - MONGODB_PASSWORD=[ Your pass ]
 
   frontend:
     image: jankonenergia/frontend
     ports:
       - "3000:3000"
+
+  mongodb:
+    image: mongo:latest
+    ports: 
+      - 27017
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=[ Your username ]
+      - MONGO_INITDB_ROOT_PASSWORD=[ Your pass ]
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      resources:
+        limits:
+          memory: 512M
