@@ -30,7 +30,7 @@ after_success:
 - cd $TRAVIS_BUILD_DIR/backend && docker build -t jankonenergia/backend . --label "version=$TRAVIS_BUILD_NUMBER" --label "commitMessage=$TRAVIS_COMMIT_MESSAGE" --label "commit=$TRAVIS_COMMIT"
 deploy:
 - provider: script
-  script: "./docker_push.sh"
+  script: bash docker_push.sh
   on:
     branch: master
 - provider: script
