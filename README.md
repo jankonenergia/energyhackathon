@@ -65,3 +65,5 @@ This resolves as:
 ```
 
 if you want to create a new token, just use ```jankonenergia``` as the secret (suprise suprise! - well at the least for now)
+
+(There will be an mutation to create a new user from the graphql api)
