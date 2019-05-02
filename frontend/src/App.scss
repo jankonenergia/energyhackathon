@@ -1,22 +1,39 @@
-.App {
-  text-align: center;
+html, body {
+  height: 100%;
 }
 
-.App-logo {
+body {
+  margin: 0;
+}
+
+.App {
+  text-align: center;
+  background-color: #282c34;
+  color: white;
+  height: 100vh;
+}
+
+.jankko {
   animation: spin infinite 3s linear;
-  height: 35vmin;
+  height: 15vmin;
   pointer-events: none;
+  margin-top: 46px;
 }
 
 .App-header {
+  display: flex;
+  font-size: 14px;
+  color: white;
+}
+
+.container {
+  text-align: center;
   background-color: #282c34;
-  min-height: 100vh;
+  color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-content: center;
 }
 
 @keyframes spin {
