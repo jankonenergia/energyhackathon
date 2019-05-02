@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "***********[ Pulling latest images ]***********"
 ssh $SERVER_USERNAME@jankon.energy 'sudo docker pull jankonenergia/frontend:latest'
 ssh $SERVER_USERNAME@jankon.energy 'sudo docker pull jankonenergia/backend:latest'
@@ -8,3 +7,6 @@ BACKEND="sudo docker service update --env-add VERSION='$TRAVIS_BUILD_NUMBER' --e
 FRONTEND="sudo docker service update --env-add VERSION='$TRAVIS_BUILD_NUMBER' --env-add COMMIT='$TRAVIS_COMMIT' --env-add COMMIT_MESSAGE='$TRAVIS_COMMIT_MESSAGE' --image jankonenergia/frontend:latest jankonenergia_frontend"
 ssh $SERVER_USERNAME@jankon.energy $FRONTEND
 ssh $SERVER_USERNAME@jankon.energy $BACKEND
+echo "***********[ Cleanup ]***********"
+CLEANUP="sudo docker system prune -f"
+ssh $SERVER_USERNAME@jankon.energy $CLEANUP
