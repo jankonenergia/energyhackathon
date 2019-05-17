@@ -12,6 +12,7 @@ const typeDefs = gql`
     deleteHousing(_id: String!): HousingInfo,
     createMeasurement(measurement: MeasurementInput!): Measurement
     deleteMeasurement(_id: ID!): Measurement
+    logIn(nickname: String, password: String): User,
   },
 
   """
@@ -24,7 +25,6 @@ const typeDefs = gql`
     measurements(userId: String!, from: Date!, to: Date!): [Measurement]
     friendMeasurements(userId: String!, from: Date!, to: Date!): [Measurement]
     serverInfo: ServerInfo,
-    logIn(nickname: String, password: String): User,
   },
 
   """

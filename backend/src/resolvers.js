@@ -18,7 +18,6 @@ const resolvers = {
         }
         return getAllProfiles()
       },
-      logIn: (obj,args) => logIn(args.nickname, args.password),
       me: (obj, args, context, info) => context.user,
       measurements: (obj, args, context, info) => {
         if(!context.user) {
@@ -38,6 +37,7 @@ const resolvers = {
       }
     },
     Mutation: {
+      logIn: (obj,args) => logIn(args.nickname, args.password),
       createUser: (obj, args) => createProfile(args),
       updateUser: (obj, args, context) => {
         if(!context.user) {
