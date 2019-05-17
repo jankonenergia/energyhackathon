@@ -13,13 +13,6 @@ body {
   height: 100vh;
 }
 
-.jankko {
-  animation: spin infinite 3s linear;
-  height: 15vmin;
-  pointer-events: none;
-  margin-top: 46px;
-}
-
 .App-header {
   display: flex;
   font-size: 14px;
@@ -34,13 +27,4 @@ body {
   flex-direction: column;
   justify-content: center;
   align-content: center;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
