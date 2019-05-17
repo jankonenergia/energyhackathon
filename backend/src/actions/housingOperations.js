@@ -10,8 +10,7 @@ exports.createOrUpdateHousing = async (args) => {
     if(id) {
         return Housing.update({_id: id}, housing)
     } else {
-        let ho = Housing.create(housing)
-        return ho;
+        return Housing.create(housing)
     }
 }
 

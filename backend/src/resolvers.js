@@ -1,19 +1,21 @@
 
 import {AuthenticationError} from 'apollo-server'
-import {logIn, createProfile, getProfile} from './actions/profileOperations'
+import {logIn, createProfile, getProfile, getAllProfiles} from './actions/profileOperations'
 import {getHousing, createOrUpdateHousing} from './actions/housingOperations'
 
 const resolvers = {
     Query: {
       user: (obj, args, context) => {
-        if (!context.user) return null
-
-        return null //TODO: to be changed
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getProfile(args.id)
       },
       users: (obj, args, context) => {
-        if (!context.user) return []
-
-        return null //TODO: to be changed
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getAllProfiles()
       },
       logIn: (obj,args) => logIn(args.nickname, args.password),
       me: (obj, args, context, info) => context.user,
