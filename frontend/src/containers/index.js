@@ -6,3 +6,5 @@ export { default as NotFound } from './NotFound';
 export { default as Home } from './Home';
 export { default as CreateHousing } from './CreateHousing';
 export { default as LogOut } from './LogOut';
+export { default as Friends } from './Friends';
+export { default as Challenges } from './Challenges';
