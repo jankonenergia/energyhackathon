@@ -13,8 +13,10 @@ const typeDefs = gql`
     createMeasurement(measurement: MeasurementInput!): Measurement
     deleteMeasurement(_id: ID!): Measurement
     logIn(nickname: String, password: String): User,
-    addFriend(userId: ID!, nickname: String!): Friend
-    unFriend(userId: ID!, friendId: ID!): Friend
+    addFriend(userId: ID!, nickname: String!): Friend,
+    unFriend(userId: ID!, friendId: ID!): Friend,
+    createChallenge(challenge: ChallengeInput!): Challenge,
+    removeChallenge(_id: ID!): Challenge
   },
 
   """
@@ -27,7 +29,9 @@ const typeDefs = gql`
     measurements(userId: String!, from: Date!, to: Date!): [Measurement]
     friendMeasurements(userId: String!, from: Date!, to: Date!): [Measurement]
     serverInfo: ServerInfo,
-    getFriends(_id: String): [Friend]
+    getFriends(_id: String): [Friend],
+    getChallenge(_id: ID!): Challenge
+    getChallenges(userId: ID!): [Challenge]
   },
 
   """
@@ -63,6 +67,14 @@ const typeDefs = gql`
     date: Date!
   },
 
+  input ChallengeInput {
+    userId: ID!, 
+    title: String,
+    description: String,
+    from: Date,
+    to: Date
+  },
+
   """
   Types for Jankon Energia
   """
@@ -74,6 +86,8 @@ const typeDefs = gql`
       lastName: String,
       token: String,
       housing: HousingInfo
+      challenges: [Challenge]
+      friends: [Friend]
   },
 
   type ServerInfo {
@@ -106,6 +120,16 @@ const typeDefs = gql`
     friendId: String!,
     friend: User
   },
+
+  type Challenge {
+    _id: ID!,
+    userId: ID!, 
+    user: User
+    title: String,
+    description: String,
+    from: Date,
+    to: Date
+  }
 
   """
   Enums

@@ -4,6 +4,7 @@ import {logIn, createProfile, getProfile, getAllProfiles, deleteProfile, updateP
 import {getHousing, createOrUpdateHousing, removeHousing} from './actions/housingOperations'
 import {getMeasurements, createMeasurement, deleteMeasurement} from './actions/measurementOperations'
 import {getFriends, addFriend, unFriend} from './actions/friendOperations'
+import {getChallenges,getChallenge, createChallenge, removeChallenge} from './actions/challengeOperations'
 
 const resolvers = {
     Query: {
@@ -41,7 +42,21 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return getFriends(args)
+      },
+      getChallenges: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getChallenges(args.userId)
+
+      },
+      getChallenge: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getChallenge(args)
       }
+    
     },
     Mutation: {
       logIn: (obj,args) => logIn(args.nickname, args.password),
@@ -93,6 +108,18 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return unFriend(args.userId, args.friendId)
+      },
+      createChallenge: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return createChallenge(args)
+      },
+      removeChallenge: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return removeChallenge(args)
       }
      },
     Measurement: {
@@ -105,7 +132,22 @@ const resolvers = {
     },
     User: {
       housing: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
         return getHousing(obj._id)
+      },
+      challenges: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getChallenges(obj._id)
+      },
+      friends: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getFriends(obj)
       }
     }, 
     HousingInfo: {
@@ -128,6 +170,14 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return getProfile(obj.friendId)
+      }
+    },
+    Challenge: {
+      user: (obj,args,context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getProfile(obj.userId)
       }
     }
   }
