@@ -9,7 +9,7 @@ export default class HomePage extends React.PureComponent {
     return (
       <div className="App">
         <header className="App-header">
-          {process.env.TRAVIS_BUILD_NUMBER}
+          {process.env.REACT_BUILD_VERSION}
         </header>
         <div className="container">
           <div className="query">
