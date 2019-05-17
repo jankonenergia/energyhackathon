@@ -11,15 +11,16 @@ const server = new ApolloServer({
   context: async ({ req }) => {
     const bearerToken = req.headers.authorization ? req.headers.authorization.replace('Bearer ', '') : null
     if (bearerToken) {
-        const payload = await util.promisify(jwt.verify)(bearerToken, 'jankonenergia') //TODO: Move to env variable
-        return { user: payload }
+        const payload = await util.promisify(jwt.verify)(bearerToken, process.env.PROFILE_JWT_SECRET)
+        console.log(payload)
+        return { user: payload.user }
     }
     
     return null
   } 
 })
 
-var connectionstring = `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@mongodb/jankonenergia?authSource=admin`
+var connectionstring = `mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@localhost/jankonenergia?authSource=admin`
 mongoose.connect(connectionstring,{ useNewUrlParser: true }, function(err) { if(err) console.log(err) })
 server.listen().then(({ url }) => {
     console.log(`Jankon Energia Server ready at ${url}`)

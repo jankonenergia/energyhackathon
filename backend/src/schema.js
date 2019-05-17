@@ -6,14 +6,14 @@ const typeDefs = gql`
   """
   type Mutation {
     createEnergyMeasurementReading(reading: Float!): EnergyMeasurement,
-    createUser(user: UserInput!): User
+    createUser(user: UserInput!): User,
   },
 
   """
   Inputs for Jankon Energia
   """
   input UserInput {
-    email: String!,
+    nickname: String!,
     password: String!,
     firstName: String!,
     lastName: String!
@@ -27,15 +27,17 @@ const typeDefs = gql`
     users: [User],
     me: User,
     energyMeasurements(email: String!, from: Date, to: Date): [EnergyMeasurement],
-    serverInfo: ServerInfo
+    serverInfo: ServerInfo,
+    logIn(nickname: String, password: String): User,
   },
 
   type User {
-      id: ID!,
+      _id: ID!,
       createdAt: String!,
-      email: String,
+      nickname: String,
       firstName: String,
-      lastName: String
+      lastName: String,
+      token: String,
   },
 
   type EnergyMeasurement {

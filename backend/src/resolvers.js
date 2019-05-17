@@ -1,3 +1,5 @@
+import {logIn, createProfile} from './actions/profileOperations'
+
 const resolvers = {
     Query: {
       user: (obj, args, context) => {
@@ -10,6 +12,7 @@ const resolvers = {
 
         return null //TODO: to be changed
       },
+      logIn: (obj,args) => logIn(args.nickname, args.password),
       me: (obj, args, context, info) => context.user,
       energyMeasurements: (obj, args, context, info) => {
         if (!context.user) return []
@@ -22,7 +25,7 @@ const resolvers = {
       }
     },
     Mutation: {
-      createUser: (obj, args) => {},
+      createUser: (obj, args) => createProfile(args),
       createEnergyMeasurementReading: (obj, args) => {}
     }
   }
