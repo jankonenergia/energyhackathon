@@ -17,21 +17,26 @@ const typeDefs = gql`
     unFriend(userId: ID!, friendId: ID!): Friend,
     createChallenge(challenge: ChallengeInput!): Challenge,
     removeChallenge(_id: ID!): Challenge
+    createSavedConsumption(savedConsumption: SavedConsumptionInput!): SavedConsumption
+    removeSavedConsumption(_id: ID!): SavedConsumption
   },
 
   """
   Querys for Jankon Energia
   """
   type Query {
-    user(id: String): User
+    user(id: String!): User
     users: [User],
     me: User,
     measurements(userId: String!, from: Date!, to: Date!): [Measurement]
     friendMeasurements(userId: String!, from: Date!, to: Date!): [Measurement]
     serverInfo: ServerInfo,
     getFriends(_id: String): [Friend],
-    getChallenge(_id: ID!): Challenge
-    getChallenges(userId: ID!): [Challenge]
+    getChallenge(_id: ID!): Challenge,
+    getChallenges(userId: ID!): [Challenge],
+    getConsumptionTypes: [ConsumptionType],
+    getSavedConsumptions(userId: ID!, from: Date!, to: Date!): [SavedConsumption]
+    getAllSavedConsumptions(userId: ID!): [SavedConsumption]
   },
 
   """
@@ -75,12 +80,19 @@ const typeDefs = gql`
     to: Date
   },
 
+  input SavedConsumptionInput {
+    userId: String,
+    consumptionTypeId: String,
+    value: Float,
+    date: Date
+  },
+
   """
   Types for Jankon Energia
   """
   type User {
       _id: ID!,
-      createdAt: String!,
+      createdAt: Date!,
       nickname: String,
       firstName: String,
       lastName: String,
@@ -129,6 +141,23 @@ const typeDefs = gql`
     description: String,
     from: Date,
     to: Date
+  },
+
+  type ConsumptionType {
+    _id: ID,
+    title: String,
+    description: String,
+    amount: Float,
+    amountType: String
+  },
+
+  type SavedConsumption {
+    _id: ID,
+    userId: String,
+    consumptionTypeId: String,
+    consumptionType: ConsumptionType,
+    value: Float,
+    date: Date
   }
 
   """
