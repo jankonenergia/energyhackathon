@@ -11,8 +11,8 @@ export default class TotalSavingChart extends React.Component {
           container
           spacing={0}
           direction="column"
-          alignItems="left"
-          justify="left"
+          alignItems="flex-start"
+          justify="flex-start"
         >
           <Grid item xs={12} md={3}>
             <p>Säästöt alueittain</p>

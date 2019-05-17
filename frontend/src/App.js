@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from "react-router-dom";
-import { HomePage, Login, Register, NotFound, LandingPage, LogOut } from './containers';
+import { HomePage, Login, Register, NotFound, LandingPage, LogOut, Challenges, Friends } from './containers';
 import PrivateRoute from './PrivateRoute'
 
 const App = () => (
@@ -9,6 +9,8 @@ const App = () => (
     <Route exact path="/login" component={Login} />
     <Route exact path="/register" component={Register} />
     <PrivateRoute exact path="/home" component={HomePage} />
+    <PrivateRoute exact path="/friends" component={Friends} />
+    <PrivateRoute exact path="/challenges" component={Challenges} />
     <PrivateRoute exact path="/logout" component={LogOut} />
     <Route component={NotFound} />
   </Switch>

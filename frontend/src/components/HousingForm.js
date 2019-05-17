@@ -37,7 +37,6 @@ export default class HousingForm extends React.Component {
       });
       this.setState({ errors })
     }
-    console.log(house)
     if (!hasErrors && !hasFirst) onSubmit(house);
   }
 
