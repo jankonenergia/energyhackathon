@@ -1,22 +1,14 @@
 import React from 'react';
-import asiakunnossa from './images/asiakunnossa.gif';
-import './App.scss';
-import Person from './Person';
+import { BrowserRouter as Switch, Route } from "react-router-dom";
+import { HomePage, Login, Register, NotFound } from './containers';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        {process.env.TRAVIS_BUILD_NUMBER}
-      </header>
-      <div className="container">
-        <div className="query">
-          <Person />
-          <img src={asiakunnossa} className="jankko" alt="logo" />
-        </div>
-      </div>
-    </div>
-  );
-}
+const App = () => (
+  <Switch>
+    <Route exact path="/" component={HomePage} />
+    <Route exact path="/login" component={Login} />
+    <Route exact path="/register" component={Register} />
+    <Route component={NotFound} />
+  </Switch>
+);
 
 export default App;

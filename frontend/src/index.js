@@ -1,28 +1,81 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router } from 'react-router-dom'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import FontFaceObserver from 'fontfaceobserver';
+import { createBrowserHistory as createHistory } from 'history'
 import { ApolloProvider } from 'react-apollo';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ApolloClient from 'apollo-boost';
 
+import App from './App';
+
+import './theme/theme.scss';
+import colors from './theme/colors.scss';
+
+// Load the favicon
+/* eslint-disable-next-line import/no-webpack-loader-syntax */
+// import '!file-loader?name=[name].[ext]!./images/favicon.ico';
+
+//import './theme/theme.scss';
+//import 'theme/colors.scss';
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+    primary: {
+      500: colors.primary,
+      contrastText: '#fff'
+    }
+  },
+  typography: {
+    useNextVariants: true
+  }
+});
+
+const eczarObserver = new FontFaceObserver('Eczar', {});
+const robotoObserver = new FontFaceObserver('Roboto Condensed', {});
+
+eczarObserver.load().then(() => {
+  document.body.classList.add('fontLoaded');
+}, () => {
+  document.body.classList.remove('fontLoaded');
+});
+
+robotoObserver.load().then(() => {
+  document.body.classList.add('fontLoaded');
+}, () => {
+  document.body.classList.remove('fontLoaded');
+});
+
 const client = new ApolloClient({
-  uri: "http://jankon.energy:4000",
+  uri: "https://graphql.jankon.energy",
   request: operation => {
     operation.setContext({
-      headers: {
-        authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIiLCJmaXJzdE5hbWUiOiJLYWxlcnZvIiwibGFzdE5hbWUiOiJKYW5ra28iLCJlbWFpbCI6ImFzaWEua3Vubm9zc2FAamFua2tvLmVuZXJneSIsImNyZWF0ZWRBdCI6IjIwMTktMDQtMzBUMjE6MDE6MDcrMDA6MDAifQ.8AMQR2p1nRbmzV7O8NNHcZ0IBMes7QpqEAKyjV7jcC4`
-      },
+
     });
   },
   cache: new InMemoryCache(),
 });
 
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
-  document.getElementById('root'));
+const history = createHistory();
+const MOUNT_NODE = document.getElementById('root');
+
+const render = () => {
+  ReactDOM.render(
+    <MuiThemeProvider theme={theme}>
+      <ApolloProvider client={client}>
+        <Router history={history}>
+          <App />
+        </Router>
+      </ApolloProvider>
+    </MuiThemeProvider>,
+    MOUNT_NODE
+  );
+};
+
+render();
 
 serviceWorker.unregister();

@@ -1,0 +1,19 @@
+$primary: #1EB980;
+$primary-dark: #045D56;
+$orange: #FF6859;
+$blue: #72DEFF;
+$yellow: #FFCF44;
+$purple: #B15DFF;
+$background: #33333D;
+$background-light: #373740;
+$white: #fff;
+$black: #000;
+
+:export {
+  primary: $primary;
+  primary-dark: $primary-dark;
+  orange: $orange;
+  blue: $blue;
+  background: $background;
+  background-light: $background-light;
+}

@@ -1,0 +1,49 @@
+@import './colors.scss';
+
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body.fontLoaded {
+  font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#root {
+  color: $white;
+  background-color: $background;
+}
+
+
+h1,
+h2,
+h4 {
+  font-weight: lighter;
+}
+
+h3 {
+  font-family: 'Eczar', Times, 'Times New Roman', serif;
+  font-weight: lighter;
+}
+
+.sub {
+  font-family: 'Roboto Condensed', Times, 'Times New Roman', serif;
+  font-size: 16px;
+}
+
+.jankko {
+  animation: spin infinite 3s linear;
+  height: 15vmin;
+  pointer-events: none;
+  margin-top: 46px;
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
