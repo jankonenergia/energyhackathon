@@ -13,6 +13,8 @@ const typeDefs = gql`
     createMeasurement(measurement: MeasurementInput!): Measurement
     deleteMeasurement(_id: ID!): Measurement
     logIn(nickname: String, password: String): User,
+    addFriend(userId: ID!, nickname: String!): Friend
+    unFriend(userId: ID!, friendId: ID!): Friend
   },
 
   """
@@ -25,6 +27,7 @@ const typeDefs = gql`
     measurements(userId: String!, from: Date!, to: Date!): [Measurement]
     friendMeasurements(userId: String!, from: Date!, to: Date!): [Measurement]
     serverInfo: ServerInfo,
+    getFriends(_id: String): [Friend]
   },
 
   """
@@ -95,6 +98,13 @@ const typeDefs = gql`
     user: User,
     value: Float
     date: Date
+  },
+
+  type Friend {
+    userId: String!,
+    user: User
+    friendId: String!,
+    friend: User
   },
 
   """

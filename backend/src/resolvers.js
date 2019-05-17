@@ -3,6 +3,7 @@ import {AuthenticationError} from 'apollo-server'
 import {logIn, createProfile, getProfile, getAllProfiles, deleteProfile, updateProfile} from './actions/profileOperations'
 import {getHousing, createOrUpdateHousing, removeHousing} from './actions/housingOperations'
 import {getMeasurements, createMeasurement, deleteMeasurement} from './actions/measurementOperations'
+import {getFriends, addFriend, unFriend} from './actions/friendOperations'
 
 const resolvers = {
     Query: {
@@ -34,6 +35,12 @@ const resolvers = {
       serverInfo: (obj, args, context) => { 
         if (!context.user) return null
         return { buildNumber: process.env.VERSION, commitMessage: process.env.COMMIT_MESSAGE, commit: process.env.COMMIT}
+      },
+      getFriends: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getFriends(args)
       }
     },
     Mutation: {
@@ -74,8 +81,20 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return deleteMeasurement(args)
+      },
+      addFriend: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return addFriend(args.userId, args.nickname)
+      },
+      unFriend: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return unFriend(args.userId, args.friendId)
       }
-    },
+     },
     Measurement: {
       user: (obj, args, context) => {
         if(!context.user) {
@@ -95,6 +114,20 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return getProfile(obj.userId)
+      }
+    },
+    Friend: {
+      user: (obj,args,context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getProfile(obj.userId)
+      },
+      friend: (obj,args,context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getProfile(obj.friendId)
       }
     }
   }
