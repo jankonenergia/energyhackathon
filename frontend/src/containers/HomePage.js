@@ -30,8 +30,16 @@ export default class HomePage extends React.PureComponent {
   `;
 
     return (
-      <React.Fragment>
-        <MainDrawer />
+      <Grid
+        container
+        spacing={0}
+        direction="row"
+        wrap="nowrap"
+        style={{ minHeight: '100vh' }}
+      >
+        <Grid item xs={1}>
+          <MainDrawer />
+        </Grid>
         <Grid
           container
           spacing={0}
@@ -39,6 +47,8 @@ export default class HomePage extends React.PureComponent {
           alignItems="center"
           justify="center"
           style={{ minHeight: '100vh' }}
+          item
+          xs={11}
         >
           <Query query={GET_USER} variables={{ id: localStorage.getItem('id') }}>
             {({ loading, error, data }) => {
@@ -48,7 +58,7 @@ export default class HomePage extends React.PureComponent {
             }}
           </Query>
         </Grid>
-      </React.Fragment>
+      </Grid>
     );
   }
 }
