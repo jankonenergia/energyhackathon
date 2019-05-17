@@ -53,9 +53,13 @@ robotoObserver.load().then(() => {
 const client = new ApolloClient({
   uri: "https://graphql.jankon.energy",
   request: operation => {
-    operation.setContext({
-
-    });
+    if (localStorage.getItem('token')) {
+      operation.setContext({
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+    }
   },
   cache: new InMemoryCache(),
 });
