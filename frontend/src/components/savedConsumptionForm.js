@@ -24,6 +24,9 @@ export default class SavedConsumptionForm extends React.Component {
     handleDateChange = (event, element) => {
       this.setState({selectedDate: event.target.value})
     }
+    clearState = () => {
+      this.setState({selectedType: "", selectedPlaceHolder: "", selectedDescription: "", selectedValue: "", selectedDate: ""})
+    }
     render() {
       const QUERY_CONSUMPTION_TYPES = gql`
       query {
@@ -86,7 +89,6 @@ export default class SavedConsumptionForm extends React.Component {
             </FormControl>}
             {this.state.selectedValue && <FormControl fullWidth>
               <TextField
-                label={"Päivämäärä"}
                 type="date"
                 inputProps={{
                   name: 'consumptionDate',
@@ -98,6 +100,7 @@ export default class SavedConsumptionForm extends React.Component {
             {this.state.selectedDate && <Mutation 
               mutation={MUTATION_ADD_NEW_CONSUMPTION}
               refetchQueries={() => { return [{ query: QUERY_CONSUMPTION_TYPES }]}}
+              onCompleted={this.clearState}
               onError={error => {
                 return `Error! ${error.message}`;
               }}
