@@ -2,3 +2,4 @@
 ssh "$SERVER_USERNAME"@jankon.energy "docker service " 
 docker-compose.yml
 *.retry
+server.js

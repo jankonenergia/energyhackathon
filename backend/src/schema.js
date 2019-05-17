@@ -7,6 +7,7 @@ const typeDefs = gql`
   type Mutation {
     createEnergyMeasurementReading(reading: Float!): EnergyMeasurement,
     createUser(user: UserInput!): User,
+    createOrUpdateHousing(housing: HousingInput!): HousingInfo
   },
 
   """
@@ -18,6 +19,15 @@ const typeDefs = gql`
     firstName: String!,
     lastName: String!
   },
+
+  input HousingInput {
+    _id: String,
+    postalCode: String!,
+    address: String!,
+    housingType: HOUSINGTYPE!,
+    heatingType: HEATINGTYPE!,
+    userId: String!, 
+  }
 
   """
   Querys for Jankon Energia
@@ -38,6 +48,7 @@ const typeDefs = gql`
       firstName: String,
       lastName: String,
       token: String,
+      housing: HousingInfo
   },
 
   type EnergyMeasurement {
@@ -51,12 +62,39 @@ const typeDefs = gql`
       buildNumber: String,
       commitMessage: String,
       commit: String
+  },
+
+  type HousingInfo {
+    postalCode: String,
+    address: String,
+    housingType: HOUSINGTYPE,
+    heatingType: HEATINGTYPE,
+    userId: String, 
+    user: User
   }
+
+  """
+  Enums
+  """
+  enum HOUSINGTYPE {
+    HOUSE
+    APARTMENT
+    ROWHOUSE
+  },
+
+  enum HEATINGTYPE {
+    OIL
+    WOOD
+    ELECTRICITY
+    GAS
+  },
 
   """
   Custom type for dates
   """
   scalar Date
+
+
 `
 
 module.exports = {

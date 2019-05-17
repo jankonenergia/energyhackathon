@@ -1,4 +1,7 @@
-import {logIn, createProfile} from './actions/profileOperations'
+
+import {AuthenticationError} from 'apollo-server'
+import {logIn, createProfile, getProfile} from './actions/profileOperations'
+import {getHousing, createOrUpdateHousing} from './actions/housingOperations'
 
 const resolvers = {
     Query: {
@@ -26,7 +29,30 @@ const resolvers = {
     },
     Mutation: {
       createUser: (obj, args) => createProfile(args),
-      createEnergyMeasurementReading: (obj, args) => {}
+      createEnergyMeasurementReading: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+      },
+      createOrUpdateHousing: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return createOrUpdateHousing(args, context)
+      }
+    },
+    User: {
+      housing: (obj, args, context) => {
+        return getHousing(obj._id)
+      }
+    }, 
+    HousingInfo: {
+      user: (obj,args,context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        getProfile(obj.userId, context)
+      }
     }
   }
 

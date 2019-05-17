@@ -1,7 +1,6 @@
 import profile from '../db/models/profileModel'
 import crypto from 'crypto'
 import jwt from 'jsonwebtoken'
-import { valueFromNode } from 'apollo-utilities';
 
 exports.logIn = (username, password) => {
     const hash = crypto.createHmac('sha256', process.env.PROFILE_HASH_SECRET)
@@ -29,4 +28,8 @@ exports.createProfile = (args) => {
                     .digest('hex')
     let createdUser = profile.create(user)
     return createdUser
+}
+
+exports.getProfile = async (userId) => {
+    return profile.findOne({_id: userId});
 }
