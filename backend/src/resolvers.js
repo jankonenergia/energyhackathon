@@ -2,6 +2,7 @@
 import {AuthenticationError} from 'apollo-server'
 import {logIn, createProfile, getProfile, getAllProfiles, deleteProfile, updateProfile} from './actions/profileOperations'
 import {getHousing, createOrUpdateHousing, removeHousing} from './actions/housingOperations'
+import {getMeasurements, createMeasurement, deleteMeasurement} from './actions/measurementOperations'
 
 const resolvers = {
     Query: {
@@ -19,10 +20,17 @@ const resolvers = {
       },
       logIn: (obj,args) => logIn(args.nickname, args.password),
       me: (obj, args, context, info) => context.user,
-      energyMeasurements: (obj, args, context, info) => {
-        if (!context.user) return []
-
-        return null //TODO: to be changed
+      measurements: (obj, args, context, info) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getMeasurements(args)
+      },
+      friendMeasurements: (obj, args, context, info) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getMeasurements(args)
       },
       serverInfo: (obj, args, context) => { 
         if (!context.user) return null
@@ -43,11 +51,6 @@ const resolvers = {
         }
         return deleteProfile(args)
       },
-      createEnergyMeasurementReading: (obj, args, context) => {
-        if(!context.user) {
-          throw new AuthenticationError('must authenticate')
-        }
-      },
       createOrUpdateHousing: (obj, args, context) => {
         if(!context.user) {
           throw new AuthenticationError('must authenticate')
@@ -59,6 +62,26 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return removeHousing(args)
+      },
+      createMeasurement: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return createMeasurement(args.measurement)
+      },
+      deleteMeasurement: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return deleteMeasurement(args)
+      }
+    },
+    Measurement: {
+      user: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getProfile(obj.userId)
       }
     },
     User: {

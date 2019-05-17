@@ -5,12 +5,26 @@ const typeDefs = gql`
   Mutations Jankon Energia
   """
   type Mutation {
-    createEnergyMeasurementReading(reading: Float!): EnergyMeasurement,
     createUser(user: UserInput!): User,
     updateUser(user: UserUpdateInput!): User,
     deleteUser(_id: String!): User,
-    createOrUpdateHousing(housing: HousingInput!): HousingInfo
-    deleteHousing(_id: String!): HousingInfo
+    createOrUpdateHousing(housing: HousingInput!): HousingInfo,
+    deleteHousing(_id: String!): HousingInfo,
+    createMeasurement(measurement: MeasurementInput!): Measurement
+    deleteMeasurement(_id: ID!): Measurement
+  },
+
+  """
+  Querys for Jankon Energia
+  """
+  type Query {
+    user(id: String): User
+    users: [User],
+    me: User,
+    measurements(userId: String!, from: Date!, to: Date!): [Measurement]
+    friendMeasurements(userId: String!, from: Date!, to: Date!): [Measurement]
+    serverInfo: ServerInfo,
+    logIn(nickname: String, password: String): User,
   },
 
   """
@@ -38,20 +52,17 @@ const typeDefs = gql`
     housingType: HOUSINGTYPE!,
     heatingType: HEATINGTYPE!,
     userId: String!, 
-  }
-
-  """
-  Querys for Jankon Energia
-  """
-  type Query {
-    user(id: String): User
-    users: [User],
-    me: User,
-    energyMeasurements(email: String!, from: Date, to: Date): [EnergyMeasurement],
-    serverInfo: ServerInfo,
-    logIn(nickname: String, password: String): User,
   },
 
+  input MeasurementInput {
+    userId: String!,
+    value: Float!,
+    date: Date!
+  },
+
+  """
+  Types for Jankon Energia
+  """
   type User {
       _id: ID!,
       createdAt: String!,
@@ -60,13 +71,6 @@ const typeDefs = gql`
       lastName: String,
       token: String,
       housing: HousingInfo
-  },
-
-  type EnergyMeasurement {
-      id: ID!,
-      createdAt: String!,
-      reading: Float,
-      from: User
   },
 
   type ServerInfo {
@@ -84,6 +88,14 @@ const typeDefs = gql`
     userId: String, 
     user: User
   }
+
+  type Measurement {
+    _id: ID,
+    userId: String,
+    user: User,
+    value: Float
+    date: Date
+  },
 
   """
   Enums
@@ -105,10 +117,7 @@ const typeDefs = gql`
   Custom type for dates
   """
   scalar Date
-
-
 `
-
 module.exports = {
     typeDefs
 };
