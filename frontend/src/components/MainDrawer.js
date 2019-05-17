@@ -22,7 +22,7 @@ export default class MainDrawer extends React.Component {
         }}
         style={{ backgroundColor: '#fff' }}
       >
-        <Grid container direction="column" style={{ height: '100%', maxWidth: '100%' }} justify="center" alignContent="center" spacing={32}>
+        <Grid container direction="column" style={{ height: '100%', maxWidth: '100%', paddingLeft: '12px' }} justify="center" alignContent="center" spacing={32}>
           <img src={logo} className="logo" alt="logo" />
           <List>
             <ListItem onClick={() => this.goTo('home')} style={{ textAlign: 'center' }} button key="koti">
