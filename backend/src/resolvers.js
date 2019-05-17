@@ -51,7 +51,7 @@ const resolvers = {
         if(!context.user) {
           throw new AuthenticationError('must authenticate')
         }
-        getProfile(obj.userId, context)
+        return getProfile(obj.userId)
       }
     }
   }

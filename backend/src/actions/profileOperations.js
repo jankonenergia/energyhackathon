@@ -1,6 +1,8 @@
 import profile from '../db/models/profileModel'
 import crypto from 'crypto'
 import jwt from 'jsonwebtoken'
+import mongoose from 'mongoose'
+import { storeKeyNameFromField } from 'apollo-utilities';
 
 exports.logIn = (username, password) => {
     const hash = crypto.createHmac('sha256', process.env.PROFILE_HASH_SECRET)
@@ -31,5 +33,6 @@ exports.createProfile = (args) => {
 }
 
 exports.getProfile = async (userId) => {
-    return profile.findOne({_id: userId});
+    console.log(userId)
+    return profile.findOne({_id: mongoose.Types.ObjectId(userId)})
 }
