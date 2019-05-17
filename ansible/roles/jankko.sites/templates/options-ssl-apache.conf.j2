@@ -1,0 +1,14 @@
+SSLProxyEngine On
+SSLEngine on
+
+# Use HTTP Strict Transport Security to force client to use secure connections only (12 months)
+Header always set Strict-Transport-Security "max-age=31536000"
+
+Alias /.well-known/acme-challenge/ "/var/www/html/.well-known/acme-challenge/"
+<Directory "/var/www/html/.well-known/acme-challenge/">
+    AllowOverride None
+    Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+    Require method GET POST OPTIONS
+</Directory>
+
+ProxyPass  /.well-known/acme-challenge !

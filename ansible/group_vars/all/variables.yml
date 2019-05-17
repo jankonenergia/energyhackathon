@@ -1,0 +1,53 @@
+jankko_public_website_FQDN:
+  - { site: jankon.energy, port: 3000, whitelist: false, usesocket: false, target: "{{ hostvars['jankko']['ansible_ssh_host'] }}" }
+  - { site: www.jankon.energy, port: 3000, whitelist: false, usesocket: false, target: "{{ hostvars['jankko']['ansible_ssh_host'] }}" }
+  - { site: graphql.jankon.energy, port: 4000, whitelist: false, usesocket: false, target: "{{ hostvars['jankko']['ansible_ssh_host'] }}" }
+apache_listen_port: 80
+apache_listen_port_ssl: 443
+apache_create_vhosts: false
+apache_remove_default_vhost: true
+apache_state: started
+apache_packages_state: installed
+apache_mods_enabled:
+  - rewrite.load
+  - remoteip.load
+  - ssl.load
+  - status.load
+  - socache_shmcb.load
+  - setenvif.load
+  - proxy_wstunnel.load
+  - proxy.load
+  - proxy_http.load
+  - negotiation.load
+  - mpm_event.load
+  - mime.load
+  - filter.load
+  - env.load
+  - dir.load
+  - deflate.load
+  - autoindex.load
+  - authz_user.load
+  - authz_core.load
+  - authn_file.load
+  - authn_core.load
+  - auth_basic.load
+  - alias.load
+  - access_compat.load
+  - headers.load
+certbot_auto_renew_user: root
+certbot_admin_email: toni.iltanen@gmail.fi
+certbot_create_command: "{{ certbot_script }} certonly --standalone --noninteractive --agree-tos --email {{ cert_item.email | default(certbot_admin_email) }} -d {{ cert_item.domains | join(' -d ') }}"
+cc_certbot_renew_log:  /var/log/le-renew.log
+certbot_auto_renew_options: "--webroot --webroot-path /var/www/html --no-self-upgrade --quiet --post-hook '/usr/sbin/service apache2 reload' >> {{ cc_certbot_renew_log }}"
+certbot_auto_renew_minute: 20
+certbot_auto_renew_hour: 5
+certbot_create_if_missing: yes
+certbot_create_standalone_stop_services:
+  - apache2
+certbot_certs:
+  - domains:
+      - jankon.energy
+  - domains:
+      - www.jankon.energy
+  - domains:
+      - graphql.jankon.energy

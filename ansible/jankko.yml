@@ -1,0 +1,12 @@
+- name: Jankon energia dependencies
+  hosts: servers
+  become: yes
+  remote_user: toniiltanen
+  pre_tasks:
+    - name: 'install python2'
+      raw: sudo apt-get -y install python
+  roles:
+    - geerlingguy.apache
+    - geerlingguy.docker
+    - geerlingguy.certbot
+    - jankko.sites

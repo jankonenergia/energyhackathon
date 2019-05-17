@@ -1,0 +1,64 @@
+---
+- name: Copy ssl.conf
+  copy:
+    src: ssl.conf
+    dest: /etc/apache2/conf-available/ssl.conf
+  notify: reload apache2
+  tags: hardening
+
+- name: Enable ssl.conf
+  file:
+    src: /etc/apache2/conf-available/ssl.conf
+    dest: /etc/apache2/conf-enabled/ssl.conf
+    state: link
+  notify: reload apache2
+  tags: hardening
+
+- name: Lets encrypt apache SSL
+  template: src=templates/options-ssl-apache.conf.j2 dest=/etc/letsencrypt/options-ssl-apache.conf
+  notify: reload apache2
+
+- name: HTTP to HTTPS redirect
+  template: src=templates/http_to_https.conf.j2 dest=/etc/apache2/sites-available/http_to_https.conf
+  notify: reload apache2
+
+- name: Site Deploy
+  template: src=templates/website.conf.j2 dest=/etc/apache2/sites-available/{{ item.site }}.conf
+  with_items: "{{ jankko_public_website_FQDN }}"
+  notify: reload apache2
+
+- name: Enable site configurations
+  file:
+    src: "/etc/apache2/sites-available/{{ item.site }}.conf"
+    dest: "/etc/apache2/sites-enabled/{{ item.site }}.conf"
+    state: link
+  with_items: "{{ jankko_public_website_FQDN + [{'site':'http_to_https'}] }}"
+  notify: reload apache2
+
+- name: disable default
+  file:
+    path: /etc/apache2/sites-enabled/vhosts
+    state: absent
+  notify: reload apache2
+
+- block:
+  - name: Remove duplicate renewal job
+    file:
+      path: /etc/cron.weekly/letsencrypt-renew
+      state: absent
+
+- name: Put host names to /etc/hosts for local access via public name to work
+  lineinfile:
+    path: /etc/hosts
+    line: "127.0.0.1  {{ item }}"
+    state: present
+  with_items: "{{ certbot_certs | map(attribute='domains') | map('first') | list }}"
+  tags: hosts
+
+# SET Apache2 confs
+- block:
+  - name: Apache2 configuration
+    template: src=templates/apache2.conf.j2 dest=/etc/apache2/apache2.conf
+    notify: reload apache2
+
+  tags: apache

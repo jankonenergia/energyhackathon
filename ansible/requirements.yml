@@ -1,0 +1,12 @@
+---
+- src: https://github.com/geerlingguy/ansible-role-apache.git
+  name: geerlingguy.apache
+  version: 2.1.1
+
+- src: https://github.com/geerlingguy/ansible-role-docker.git
+  version: 2.1.0
+  name: geerlingguy.docker
+
+- src: https://github.com/geerlingguy/ansible-role-certbot.git
+  version: 3.0.0
+  name: geerlingguy.certbot

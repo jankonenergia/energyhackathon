@@ -1,0 +1,43 @@
+<VirtualHost *:443>
+    ServerName {{ item.site }}
+
+    SSLCertificateFile /etc/letsencrypt/live/{{ item.site }}/cert.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/{{ item.site }}/privkey.pem
+    SSLCertificateChainFile /etc/letsencrypt/live/{{ item.site }}/chain.pem
+
+    CustomLog /var/log/apache2/{{ item.site }}-access.log combined
+    ErrorLog /var/log/apache2/{{ item.site }}-error.log
+
+    Include /etc/letsencrypt/options-ssl-apache.conf
+    RemoteIPHeader X-Forwarded-For
+    RemoteIPHeader X-Real-IP
+    RemoteIPHeader X-Client-IP
+    
+    ProxyRequests off
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+    <Location />
+        ProxyPass http://{{ item.target }}:{{ item.port }}/
+        ProxyPassReverse http://{{ item.target }}:{{ item.port }}//
+    </Location>
+    <Location /.well-known/acme-challenge>
+      Allow from all
+      ProxyPass "!"
+    </Location>
+    <Location /server-status>
+      Allow from local
+      ProxyPass "!"
+    </Location>
+
+    {% if item.usesocket -%}
+    RewriteEngine On
+    RewriteCond %{HTTP:Upgrade} =websocket [NC]
+    RewriteRule /(.*)           ws://{{ item.target }}:{{ item.port }}/$1 [P,L]
+    RewriteCond %{HTTP:Upgrade} !=websocket [NC]
+    RewriteCond %{REQUEST_URI}  !^/.well-known/acme-challenge
+    RewriteCond %{REQUEST_URI}  !^/server-status$
+    RewriteRule /(.*)           http://{{ item.target }}:{{ item.port}}/$1 [P,L]
+    {% endif %}
+</VirtualHost>
