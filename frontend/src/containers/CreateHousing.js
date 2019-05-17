@@ -22,8 +22,7 @@ export default class CreateHousing extends React.PureComponent {
           _id,
         }
       }
-
-    `
+    `;
     return (
       <Mutation mutation={POST_HOUSE}>
         {(postMutation, { data, error, loading }) => {

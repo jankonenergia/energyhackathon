@@ -5,6 +5,7 @@ import { Query } from 'react-apollo';
 import { Grid } from '@material-ui/core';
 import { MainDrawer } from '../components';
 import TotalSavingsChart from '../components/charts/totalSavingsChart'
+import SavedConsumptionForm from '../components/savedConsumptionForm'
 import Home from './Home';
 
 export default class HomePage extends React.PureComponent {
@@ -75,7 +76,8 @@ export default class HomePage extends React.PureComponent {
                     if (loading) return 'Loading...';
                     if (error) return `Error! ${error.message}`;
                     return <React.Fragment>
-                      <TotalSavingsChart data={[{angle: 1, label: "Hygienia", subLabel: "foo"}, {angle: 5, label: "Valaistus",subLabel: "bar"}, {angle: 2, label: "Muu",subLabel: "foobar"}]}/> 
+                      <TotalSavingsChart data={[{angle: 1, label: "Hygienia", subLabel: "foo"}, {angle: 5, label: "Valaistus",subLabel: "bar"}, {angle: 2, label: "Muu",subLabel: "foobar"}]}/>
+                      <SavedConsumptionForm /> 
                     </React.Fragment>
                   }}
                 </Query>
