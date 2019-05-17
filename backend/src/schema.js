@@ -21,7 +21,7 @@ const typeDefs = gql`
   },
 
   input HousingInput {
-    _id: String,
+    _id: ID,
     postalCode: String!,
     address: String!,
     housingType: HOUSINGTYPE!,
@@ -65,6 +65,7 @@ const typeDefs = gql`
   },
 
   type HousingInfo {
+    _id: ID,
     postalCode: String,
     address: String,
     housingType: HOUSINGTYPE,
