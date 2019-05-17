@@ -1,7 +1,7 @@
 
 import {AuthenticationError} from 'apollo-server'
-import {logIn, createProfile, getProfile, getAllProfiles} from './actions/profileOperations'
-import {getHousing, createOrUpdateHousing} from './actions/housingOperations'
+import {logIn, createProfile, getProfile, getAllProfiles, deleteProfile, updateProfile} from './actions/profileOperations'
+import {getHousing, createOrUpdateHousing, removeHousing} from './actions/housingOperations'
 
 const resolvers = {
     Query: {
@@ -31,6 +31,18 @@ const resolvers = {
     },
     Mutation: {
       createUser: (obj, args) => createProfile(args),
+      updateUser: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return updateProfile(args)
+      },
+      deleteUser: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return deleteProfile(args)
+      },
       createEnergyMeasurementReading: (obj, args, context) => {
         if(!context.user) {
           throw new AuthenticationError('must authenticate')
@@ -41,6 +53,12 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return createOrUpdateHousing(args, context)
+      },
+      deleteHousing: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return removeHousing(args)
       }
     },
     User: {

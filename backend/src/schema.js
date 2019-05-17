@@ -7,15 +7,26 @@ const typeDefs = gql`
   type Mutation {
     createEnergyMeasurementReading(reading: Float!): EnergyMeasurement,
     createUser(user: UserInput!): User,
+    updateUser(user: UserUpdateInput!): User,
+    deleteUser(_id: String!): User,
     createOrUpdateHousing(housing: HousingInput!): HousingInfo
+    deleteHousing(_id: String!): HousingInfo
   },
 
   """
   Inputs for Jankon Energia
   """
   input UserInput {
+    _id: String,
     nickname: String!,
     password: String!,
+    firstName: String!,
+    lastName: String!
+  },
+
+  input UserUpdateInput {
+    _id: String!,
+    nickname: String!,
     firstName: String!,
     lastName: String!
   },
