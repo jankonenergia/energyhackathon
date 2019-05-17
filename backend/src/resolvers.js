@@ -5,6 +5,8 @@ import {getHousing, createOrUpdateHousing, removeHousing} from './actions/housin
 import {getMeasurements, createMeasurement, deleteMeasurement} from './actions/measurementOperations'
 import {getFriends, addFriend, unFriend} from './actions/friendOperations'
 import {getChallenges,getChallenge, createChallenge, removeChallenge} from './actions/challengeOperations'
+import {getConsumptionTypes, getConsumptionType} from './actions/consumptionTypeOperations'
+import {getSavedConsumptions, getAllSavedConsumptions, createSavedConsumption, removeSavedConsumption} from './actions/savedConsumptionTypeOperations'
 
 const resolvers = {
     Query: {
@@ -55,8 +57,25 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return getChallenge(args)
+      },
+      getConsumptionTypes: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getConsumptionTypes()
+      },
+      getSavedConsumptions: (org, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getSavedConsumptions(args)
+      },
+      getAllSavedConsumptions: (org, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getAllSavedConsumptions(args)
       }
-    
     },
     Mutation: {
       logIn: (obj,args) => logIn(args.nickname, args.password),
@@ -120,6 +139,18 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return removeChallenge(args)
+      },
+      createSavedConsumption: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return createSavedConsumption(args)
+      },
+      removeSavedConsumption: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return removeSavedConsumption(args)
       }
      },
     Measurement: {
@@ -178,6 +209,14 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return getProfile(obj.userId)
+      }
+    },
+    SavedConsumption: {
+      consumptionType: (obj, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getConsumptionType(obj)
       }
     }
   }
