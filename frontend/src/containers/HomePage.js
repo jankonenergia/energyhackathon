@@ -54,39 +54,6 @@ export default class HomePage extends React.PureComponent {
         wrap="nowrap"
         style={{ minHeight: '100vh' }}
       >
-<<<<<<< HEAD
-        <Grid item xs={1}>
-          <MainDrawer />
-        </Grid>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="left"
-          style={{ minHeight: '100vh' }}
-          item
-          xs={11}
-        >
-          <Grid item xs={12}>
-            <Query query={GET_USER} variables={{id: localStorage.getItem('id')}}>
-              {({loading, error, data}) => {
-                if (loading) return 'Loading...';
-                if (error) return `Error! ${error.message}`;
-                return <Query query={GET_USER_CONSUMPTIONS} variables={{id: localStorage.getItem('id'), from: "2019-05-01", to: new Date().toString()}}>
-                  {({loading, error, data}) => {
-                    if (loading) return 'Loading...';
-                    if (error) return `Error! ${error.message}`;
-                    return <React.Fragment>
-                      <TotalSavingsChart data={[{angle: 1, label: "Hygienia", subLabel: "foo"}, {angle: 5, label: "Valaistus",subLabel: "bar"}, {angle: 2, label: "Muu",subLabel: "foobar"}]}/>
-                      <SavedConsumptionForm /> 
-                    </React.Fragment>
-                  }}
-                </Query>
-              }}
-            </Query>
-            <p>Niinku you know sä oot nyt hei logged in</p>
-          </Grid>
-=======
         <Grid item xs={12}>
           <Query query={GET_USER} variables={{ id: localStorage.getItem('id') }}>
             {({ loading, error, data }) => {
@@ -98,15 +65,14 @@ export default class HomePage extends React.PureComponent {
                   if (error) return `Error! ${error.message}`;
                   return <React.Fragment>
                     <TotalSavingsChart data={[{ angle: 1, label: "Hygienia", subLabel: "foo" }, { angle: 5, label: "Valaistus", subLabel: "bar" }, { angle: 2, label: "Muu", subLabel: "foobar" }]} />
+                    <SavedConsumptionForm /> 
                   </React.Fragment>
                 }}
               </Query>
             }}
           </Query>
-          <p>Niinku you know sä oot nyt hei logged in</p>
->>>>>>> 6078a1658a8b7baae48d9984f87b4c426c5b0f3b
         </Grid>
       </Grid>
-        );
-      }
+    );
+  }
 }
