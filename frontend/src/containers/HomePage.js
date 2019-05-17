@@ -65,7 +65,6 @@ export default class HomePage extends React.PureComponent {
           item
           xs={11}
         >
-<<<<<<< HEAD
           <Grid item xs={12}>
             <Query query={GET_USER} variables={{id: localStorage.getItem('id')}}>
               {({loading, error, data}) => {
@@ -84,15 +83,6 @@ export default class HomePage extends React.PureComponent {
             </Query>
             <p>Niinku you know sä oot nyt hei logged in</p>
           </Grid>
-=======
-          <Query query={GET_USER} variables={{ id: localStorage.getItem('id') }}>
-            {({ loading, error, data }) => {
-              if (loading) return 'Loading...';
-              if (error) return `Error! ${error.message}`;
-              if (data) return <Home user={data.user} />
-            }}
-          </Query>
->>>>>>> ee92d9be18ef90169c7010a5a5512b0f10b434de
         </Grid>
       </Grid>
     );
