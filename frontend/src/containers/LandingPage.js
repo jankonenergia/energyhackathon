@@ -3,14 +3,12 @@ import asiakunnossa from '../images/asiakunnossa.gif';
 import '../App.scss';
 import Person from '../Person';
 import { Button } from '@material-ui/core';
-
 export default class LandingPage extends React.PureComponent {
   componentWillMount() {
     if (localStorage.getItem('token')) {
       this.props.history.push('/home');
     }
   }
-
   render() {
     return (
       <div className="App">

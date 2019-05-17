@@ -4,14 +4,30 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { Grid } from '@material-ui/core';
 import { MainDrawer } from '../components';
+import TotalSavingsChart from '../components/charts/totalSavingsChart'
 
 export default class HomePage extends React.PureComponent {
   render() {
+    const GET_USER_CONSUMPTIONS = gql`
+    query Consumptions($id: ID!, $from: Date!, $to: Date!) {
+      getSavedConsumptions(userId: $id, from: $from, to: $to) {
+        consumptionType {
+          title,
+          description,
+          amount, 
+          amountType
+        },
+        value
+      }
+    }
+    `;
+
     const GET_USER = gql`
     query User($id: String!) {
       user(id: $id) {
         firstName,
         lastName,
+
         housing {
           _id
         },
@@ -34,8 +50,7 @@ export default class HomePage extends React.PureComponent {
           container
           spacing={0}
           direction="column"
-          alignItems="center"
-          justify="center"
+          alignItems="left"
           style={{ minHeight: '100vh' }}
         >
           <Grid item xs={12}>
@@ -43,8 +58,15 @@ export default class HomePage extends React.PureComponent {
               {({loading, error, data}) => {
                 if (loading) return 'Loading...';
                 if (error) return `Error! ${error.message}`;
-                console.log(data);
-                return <p>jee</p>
+                return <Query query={GET_USER_CONSUMPTIONS} variables={{id: localStorage.getItem('id'), from: "2019-05-01", to: new Date().toString()}}>
+                  {({loading, error, data}) => {
+                    if (loading) return 'Loading...';
+                    if (error) return `Error! ${error.message}`;
+                    return <React.Fragment>
+                      <TotalSavingsChart data={[{angle: 1, label: "Hygienia", subLabel: "foo"}, {angle: 5, label: "Valaistus",subLabel: "bar"}, {angle: 2, label: "Muu",subLabel: "foobar"}]}/> 
+                    </React.Fragment>
+                  }}
+                </Query>
               }}
             </Query>
             <p>Niinku you know sä oot nyt hei logged in</p>
