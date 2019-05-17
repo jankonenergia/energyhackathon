@@ -38,6 +38,23 @@ h3 {
   margin-top: 46px;
 }
 
+.logo {
+  height: 10vmin;
+  width: 10vmin;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+  margin-bottom: 1.5vmin;
+}
+
+.drawer {
+  background-color: $background !important;
+  border-right: 0 !important;
+}
+
+.drawerLi {
+  font-size: 0.9rem !important;
+}
 
 @keyframes spin {
   from {

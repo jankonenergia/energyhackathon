@@ -3,7 +3,7 @@ import { TextField, Button } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import '../App.scss';
 
-export default class RegisterForm extends React.PureComponent {
+export default class RegisterForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,11 +13,11 @@ export default class RegisterForm extends React.PureComponent {
       password: '',
       passwordConf: '',
       errors: {
-        fname: true,
-        lname: true,
-        nickname: true,
-        password: true,
-        passwordConf: true,
+        fname: 'first',
+        lname: 'first',
+        nickname: 'first',
+        password: 'first',
+        passwordConf: 'first',
       }
     }
   };
@@ -31,11 +31,21 @@ export default class RegisterForm extends React.PureComponent {
     const { onSubmit } = this.props;
     event.preventDefault();
     const hasErrors = Object.keys(this.state.errors).map(p => this.state.errors[p]).includes(true);
-    if (!hasErrors) onSubmit(user);
+    const hasFirst = Object.keys(this.state.errors).map(p => this.state.errors[p]).includes('first');
+    if (hasFirst) {
+      const errors = this.state.errors;
+      Object.keys(this.state.errors).forEach(e => {
+        if (this.state.errors[e] === 'first') {
+          errors[e] = true;
+        }
+      });
+      this.setState({ errors })
+    }
+    if (!hasErrors && !hasFirst) onSubmit(user);
   }
 
   validate = (input, value) => {
-    const { fname, lname, nickname, password, passwordConf, errors } = this.state;
+    const { errors } = this.state;
     if (!value) {
       this.setState({ errors: { [input]: true } })
     }
@@ -51,7 +61,7 @@ export default class RegisterForm extends React.PureComponent {
 
 
   render() {
-    const { fname, lname, nickname, password, passwordConf, errors } = this.state;
+    const { fname, lname, nickname, password, errors } = this.state;
 
     return (
       <form
@@ -68,7 +78,7 @@ export default class RegisterForm extends React.PureComponent {
           <Grid container spacing={16} direction="row">
             <Grid item xs={6}>
               <TextField
-                error={errors.fname}
+                error={errors.fname === true}
                 id="firstname"
                 label="First name"
                 value={this.state.fname}
@@ -79,7 +89,7 @@ export default class RegisterForm extends React.PureComponent {
             </Grid>
             <Grid item xs={6}>
               <TextField
-                error={errors.lname}
+                error={errors.lname === true}
                 id="lastname"
                 label="Last name"
                 value={this.state.lname}
@@ -92,7 +102,7 @@ export default class RegisterForm extends React.PureComponent {
           <Grid container direction="row">
             <Grid item xs={12}>
               <TextField
-                error={errors.nickname}
+                error={errors.nickname === true}
                 id="nickname"
                 label="Username"
                 value={this.state.nickname}
@@ -106,7 +116,7 @@ export default class RegisterForm extends React.PureComponent {
           <Grid container spacing={16} direction="row">
             <Grid item xs={6}>
               <TextField
-                error={errors.password}
+                error={errors.password === true}
                 id="password"
                 label="Password"
                 value={this.state.password}
@@ -118,7 +128,7 @@ export default class RegisterForm extends React.PureComponent {
             </Grid>
             <Grid item xs={6}>
               <TextField
-                error={errors.passwordConf}
+                error={errors.passwordConf === true}
                 id="passwordconf"
                 label="Confirm password"
                 value={this.state.passwordConf}
