@@ -42,10 +42,15 @@ export default class Login extends React.PureComponent {
           <Mutation mutation={LOGIN_USER} >
             {(postLogin, { data, error, loading }) => {
               if (loading) return <p>Loading...</p>;
-              if (data) {
+              if (data && data.logIn && data.logIn.token) {
                 localStorage.setItem('token', data.logIn.token);
                 localStorage.setItem('id', data.logIn._id);
                 this.props.history.push(this.props.from ? this.props.from : '/home');
+              } else if (data) {
+                return (
+                  <React.Fragment>
+                    <LoginForm wrongLogin onSubmit={(nickname, password) => postLogin({ variables: { nickname: nickname, password: password } })} noValidate autoComplete="false" />
+                  </React.Fragment>)
               }
               return (
                 <React.Fragment>

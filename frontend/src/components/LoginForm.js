@@ -95,6 +95,7 @@ export default class LoginForm extends React.Component {
           <Button fullWidth type="submit" style={{ marginTop: '16px' }} variant="contained" color="primary">
             Register
           </Button>
+          {this.props.wrongLogin && <p>Wrong username or password</p>}
         </Grid>
       </form>
     );
