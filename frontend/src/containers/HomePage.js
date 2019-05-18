@@ -6,6 +6,7 @@ import { Grid } from '@material-ui/core';
 import { MainDrawer } from '../components';
 import TodaysSavingsChart from '../components/charts/todaysSavingsChart'
 import SavedConsumptionForm from '../components/savedConsumptionForm'
+import NewChallengeForm from '../components/newChallengeForm'
 import Home from './Home';
 import xAxis from 'react-vis/dist/plot/axis/x-axis';
 
@@ -71,6 +72,7 @@ export default class HomePage extends React.PureComponent {
                   return <React.Fragment>
                     <TodaysSavingsChart data={data.getSavedConsumptions} />
                     <SavedConsumptionForm />
+                    <NewChallengeForm />
                   </React.Fragment>
                 }}
               </Query>
