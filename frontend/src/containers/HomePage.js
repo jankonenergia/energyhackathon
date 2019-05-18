@@ -7,10 +7,10 @@ import { MainDrawer } from '../components';
 import TodaysSavingsChart from '../components/charts/todaysSavingsChart'
 import SavedConsumptionForm from '../components/savedConsumptionForm'
 import NewChallengeForm from '../components/newChallengeForm'
-import Home from './Home';
-import xAxis from 'react-vis/dist/plot/axis/x-axis';
+import NewMeasurementForm from '../components/newMeterMeasurementForm'
 
 export default class HomePage extends React.PureComponent {
+  
   render() {
     const GET_USER_CONSUMPTIONS = gql`
     query Consumptions($id: ID!, $from: Date!, $to: Date!) {
@@ -60,7 +60,7 @@ export default class HomePage extends React.PureComponent {
         wrap="nowrap"
         style={{ minHeight: '100vh' }}
       >
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <Query query={GET_USER} variables={{ id: localStorage.getItem('id') }}>
             {({ loading, error, data }) => {
               if (loading) return 'Loading...';
@@ -73,6 +73,7 @@ export default class HomePage extends React.PureComponent {
                     <TodaysSavingsChart data={data.getSavedConsumptions} />
                     <SavedConsumptionForm />
                     <NewChallengeForm />
+                    <NewMeasurementForm />
                   </React.Fragment>
                 }}
               </Query>
