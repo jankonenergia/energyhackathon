@@ -55,7 +55,6 @@ export default class HomePage extends React.PureComponent {
     return (
       <Grid
         container
-        spacing={0}
         direction="row"
         wrap="nowrap"
         style={{ minHeight: '100vh' }}
@@ -76,7 +75,6 @@ export default class HomePage extends React.PureComponent {
                   </React.Fragment>
                 }}
               </Query>
-              
             }}
           </Query>
         </Grid>

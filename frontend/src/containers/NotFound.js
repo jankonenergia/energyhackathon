@@ -6,7 +6,6 @@ import '../App.scss';
 const NotFound = () => (
   <Grid
     container
-    spacing={0}
     direction="column"
     alignItems="center"
     justify="center"

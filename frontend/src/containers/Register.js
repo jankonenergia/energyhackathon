@@ -33,7 +33,6 @@ export default class Register extends React.PureComponent {
     return (
       <Grid
         container
-        spacing={0}
         direction="column"
         alignItems="center"
         justify="center"

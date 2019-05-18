@@ -41,7 +41,7 @@ export default class Friends extends React.PureComponent {
             if (error) return `Error! ${error.message}`;
             console.log(data.getFriends);
             return data.getFriends.map(({ friend }) => (
-              <Grid item md={2}>
+              <Grid key={friend.nickname} item md={2}>
                 <Card style={{ maxWidth: '270px' }}>
                   <CardActionArea>
                     <CardMedia
