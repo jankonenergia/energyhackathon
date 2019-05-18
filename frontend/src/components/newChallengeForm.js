@@ -31,8 +31,8 @@ export default class NewChallengeForm extends React.Component {
       `;
       return (
         <React.Fragment>
-          <h1>Uusi haaste</h1>
-          <Grid item xs={12} md={3}>
+          <Grid container direction={"column"}  item xs={12} md={4}>
+            <h1>Uusi haaste</h1>
             <FormControl fullWidth>
               <TextField
                 label={"Otsikko"}

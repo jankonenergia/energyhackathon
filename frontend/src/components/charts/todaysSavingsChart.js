@@ -22,7 +22,7 @@ export default class TodaysSavingsChart extends React.Component {
 
   factorMeasurements = () => {
     let sorted = this.props.measurements.sort ( (a, b) => new Date(a.date) - new Date(b.date));
-    if(sorted && sorted.length > 0) {
+    if(sorted && sorted.length > 1) {
       let data = sorted[1].value - sorted[0].value
       return data
     } else {
@@ -36,23 +36,16 @@ export default class TodaysSavingsChart extends React.Component {
     const measurements = this.factorMeasurements()
     return(
       this.props.data && <React.Fragment>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="flex-start"
-          justify="flex-start"
-        >
-          <Grid item xs={12} md={3}>
-            <p>Säästöt Tänään ({data.toFixed(2)}kWh)</p>
-            <XYPlot width={300} height={300} stackBy="y">
-              <VerticalGridLines />
-              <HorizontalGridLines />
-              <YAxis />
-              <VerticalBarSeries data={[{x: 1, y: measurements}]} />
-              <VerticalBarSeries data={[{x: 1, y: data}]} />
-            </XYPlot>
-          </Grid>
+
+        <Grid item xs={12} md={3}>
+          <p>Säästöt Tänään ({data.toFixed(2)}kWh)</p>
+          <XYPlot width={320} height={320} stackBy="y">
+            <VerticalGridLines />
+            <HorizontalGridLines />
+            <YAxis />
+            <VerticalBarSeries data={[{x: 1, y: measurements}]} />
+            <VerticalBarSeries data={[{x: 1, y: data}]} />
+          </XYPlot>
         </Grid>
       </React.Fragment>
     )   

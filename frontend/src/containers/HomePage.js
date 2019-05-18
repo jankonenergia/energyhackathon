@@ -61,29 +61,26 @@ export default class HomePage extends React.PureComponent {
       <Grid
         container
         direction="row"
-        wrap="nowrap"
-        style={{ minHeight: '100vh' }}
+        spacing={16}
       >
-        <Grid item xs={12} md={6}>
-          <Query query={GET_USER} variables={{ id: localStorage.getItem('id') }}>
-            {({ loading, error, data }) => {
-              if (loading) return 'Loading...';
-              if (error) return `Error! ${error.message}`;
-              return <Query query={GET_USER_CONSUMPTIONS} variables={{ id: localStorage.getItem('id'), from: today.toDateString(), to: tomorrow.toDateString(), yesterday: yesterday.toDateString() }}>
-                {({ loading, error, data }) => {
-                  if (loading) return 'Loading...';
-                  if (error) return `Error! ${error.message}`;
-                  return <React.Fragment>
-                    <TodaysSavingsChart data={data.getSavedConsumptions} measurements={data.measurements} />
-                    <SavedConsumptionForm />
-                    <NewChallengeForm />
-                    <NewMeasurementForm />
-                  </React.Fragment>
-                }}
-              </Query>
-            }}
-          </Query>
-        </Grid>
+        <Query query={GET_USER} variables={{ id: localStorage.getItem('id') }}>
+          {({ loading, error, data }) => {
+            if (loading) return 'Loading...';
+            if (error) return `Error! ${error.message}`;
+            return <Query query={GET_USER_CONSUMPTIONS} variables={{ id: localStorage.getItem('id'), from: today.toDateString(), to: tomorrow.toDateString(), yesterday: yesterday.toDateString() }}>
+              {({ loading, error, data }) => {
+                if (loading) return 'Loading...';
+                if (error) return `Error! ${error.message}`;
+                return <React.Fragment>
+                  <TodaysSavingsChart data={data.getSavedConsumptions} measurements={data.measurements} />
+                  <SavedConsumptionForm />
+                  <NewChallengeForm />
+                  <NewMeasurementForm />
+                </React.Fragment>
+              }}
+            </Query>
+          }}
+        </Query>
       </Grid>
     );
   }

@@ -50,8 +50,8 @@ export default class SavedConsumptionForm extends React.Component {
 
       return (
         <React.Fragment>
-          <h1>Säästin energiaa seuraavanlaisesti:</h1>
-          <Grid item xs={12} md={3}>
+          <Grid container direction={"column"} item xs={12} md={4}>
+            <h1>Säästin energiaa seuraavanlaisesti:</h1>
             <FormControl fullWidth>
               <InputLabel htmlFor="consumptionType">Kulutustyyppi</InputLabel>
               <Query query={QUERY_CONSUMPTION_TYPES}>
