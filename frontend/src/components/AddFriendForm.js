@@ -50,19 +50,20 @@ export default class AddFriendForm extends React.Component {
 
   render() {
     const { nickname, password, errors } = this.state;
+    if (this.props.noFriends) return <p> No friends yet :( </p>
 
     return (
       <form
         onSubmit={this.onSubmit(nickname, password)} noValidate autoComplete="false">
         <Grid
           container
-          spacing={16}
+          spacing={0}
           direction="column"
           alignItems="center"
           justify="center"
         >
           <Grid container direction="row">
-          {this.props.noFriends && <p> No friends yet :( </p>}
+          {this.props.error && <p> User not found :( </p>}
             <Grid item xs={12}>
               <TextField
                 error={errors.nickname === true}

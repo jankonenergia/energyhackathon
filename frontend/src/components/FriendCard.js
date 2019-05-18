@@ -5,7 +5,7 @@ import logo from '../images/logo.png';
 import { Home, People, GolfCourse, ExitToApp } from '@material-ui/icons';
 import colors from '../theme/colors.scss';
 
-export default class MainDrawer extends React.Component {
+export default class FriendCard extends React.Component {
 
   goTo = page => {
     this.props.history.push(`/${page}`)
