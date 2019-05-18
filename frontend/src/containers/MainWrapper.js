@@ -49,7 +49,7 @@ export default class MainWrapper extends React.PureComponent {
         container
         direction="row"
         wrap="nowrap"
-        style={{ minHeight: '100vh' }}
+        style={{ minHeight: '100vh', overflowX: 'hidden' }}
       >
         <Grid item xs={2} lg={1} >
           <MainDrawer history={this.props.history} />
