@@ -8,8 +8,8 @@ export default class NewChallengeForm extends React.Component {
     state = {
       title: "",
       description: "",
-      from: new Date().toDateString(),
-      to: new Date().toDateString()
+      from: null,
+      to: null
     }
 
     clearState = () => {
@@ -62,6 +62,7 @@ export default class NewChallengeForm extends React.Component {
                 <TextField
                   label={"Voimassaolo alkaen"}
                   type={"date"}
+                  InputLabelProps={{ shrink: true }}
                   inputProps={{
                     name: 'challengeFrom',
                     id: 'challengeFrom',
@@ -75,6 +76,7 @@ export default class NewChallengeForm extends React.Component {
                 <TextField
                   label={"Voimassaolo päättyy"}
                   type={"date"}
+                  InputLabelProps={{ shrink: true }}
                   inputProps={{
                     name: 'challengeTo',
                     id: 'challengeTo',

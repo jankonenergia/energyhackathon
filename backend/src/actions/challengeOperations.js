@@ -8,9 +8,9 @@ exports.createChallenge = async (args) => {
         userId: args.challenge.userId,
         title: args.challenge.title,
         description: args.challenge.description,
-        from: new Date(args.challenge.from),
+        from: args.challenge.from && new Date(args.challenge.from),
         limit: args.challenge.limit,
-        to: new Date(args.challenge.to)
+        to: args.challenge.to && new Date(args.challenge.to)
     }
     return Challenge.create(challenge)
 }

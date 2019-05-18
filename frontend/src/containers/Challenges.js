@@ -49,7 +49,14 @@ export default class Challenges extends React.PureComponent {
               if (error) return `Error! ${error.message}`;
               return data.getChallenges && data.getChallenges.length > 0 && data.getChallenges.map((item) => {
                 return <Grid item direction={"row"} xs={12} md={4} spacing={16}>
-                  <Challenge title={item.title} description={item.description} id={item._id} key={item._id} /> 
+                  <Challenge 
+                    title={item.title} 
+                    description={item.description} 
+                    id={item._id} 
+                    key={item._id} 
+                    from={item.from} 
+                    to={item.to} 
+                    limit={item.limit} /> 
                 </Grid>
               })
             }}
@@ -61,7 +68,14 @@ export default class Challenges extends React.PureComponent {
               return (data.getFriends && data.getFriends.length > 0) ? data.getFriends.map((item) => {
                 return item.friend && item.friend.challenges && item.friend.challenges.map((ch) => {
                   return <Grid item direction={"row"} xs={12} md={4} spacing={16}>
-                    <Challenge title={ch.title} description={ch.description} id={item._id} key={ch._id} /> 
+                    <Challenge 
+                      title={ch.title} 
+                      description={ch.description} 
+                      id={ch._id} 
+                      key={ch._id} 
+                      from={ch.from} 
+                      to={ch.to} 
+                      limit={ch.limit} /> 
                   </Grid>
                 })
               }) : <p>Ei ystävähaasteita.</p>
