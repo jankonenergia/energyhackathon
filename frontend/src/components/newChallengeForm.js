@@ -31,74 +31,85 @@ export default class NewChallengeForm extends React.Component {
       `;
       return (
         <React.Fragment>
-          <Grid container direction={"column"}  item xs={12} md={4}>
-            <h1>Uusi haaste</h1>
-            <FormControl fullWidth>
-              <TextField
-                label={"Otsikko"}
-                inputProps={{
-                  name: 'challengeTitle',
-                  id: 'challengeTitle',
-                }}
-                onChange={this.handleChange('title')} 
-                value={this.state.title} />
-            </FormControl>
-            <FormControl fullWidth>
-              <TextField
-                label={"Kuvaus"}
-                inputProps={{
-                  name: 'challengeDescription',
-                  id: 'challengeDescription',
-                }}
-                onChange={this.handleChange('description')} 
-                value={this.state.description} />
-            </FormControl>
-            <FormControl fullWidth>
-              <TextField
-                label={"Voimassaolo alkaen"}
-                type={"date"}
-                inputProps={{
-                  name: 'challengeFrom',
-                  id: 'challengeFrom',
-                }}
-                onChange={this.handleChange('from')} 
-                value={this.state.from} />
-            </FormControl>
-            <FormControl fullWidth>
-              <TextField
-                label={"Voimassaolo päättyy"}
-                type={"date"}
-                inputProps={{
-                  name: 'challengeTo',
-                  id: 'challengeTo',
-                }}
-                onChange={this.handleChange('to')} 
-                value={this.state.to} />
-            </FormControl>
-            {this.state.title && this.state.description && <Mutation 
-              mutation={MUTATION_CREATE_NEW_CHALLENGE}
-              refetchQueries={['GetChallenges' ]}
-              onCompleted={this.clearState}
-              onError={error => `Error! ${error.message}`}
-            >
-              {createItem => (
-                <Button 
-                  onClick={() =>  {createItem({
-                    variables: {
-                      challenge: {
-                        userId: localStorage.getItem('id'),
-                        title: this.state.title,
-                        description: parseInt(this.state.description),
-                        from: this.state.from,
-                        to: this.state.to
+           
+          <Grid container direction="row" padding={16} wrap='wrap' >
+            <Grid xs={6}>
+              <FormControl fullWidth padding={16}>
+                <TextField
+                  label={"Otsikko"}
+                  inputProps={{
+                    name: 'challengeTitle',
+                    id: 'challengeTitle',
+                  }}
+                  onChange={this.handleChange('title')} 
+                  value={this.state.title} />
+              </FormControl>
+            </Grid>
+            <Grid xs={6}>
+              <FormControl fullWidth>
+                <TextField
+                  label={"Kuvaus"}
+                  inputProps={{
+                    name: 'challengeDescription',
+                    id: 'challengeDescription',
+                  }}
+                  onChange={this.handleChange('description')} 
+                  value={this.state.description} />
+              </FormControl>
+            </Grid>
+            <Grid xs={6}>
+              <FormControl fullWidth >
+                <TextField
+                  label={"Voimassaolo alkaen"}
+                  type={"date"}
+                  inputProps={{
+                    name: 'challengeFrom',
+                    id: 'challengeFrom',
+                  }}
+                  onChange={this.handleChange('from')} 
+                  value={this.state.from} />
+              </FormControl>
+            </Grid>
+            <Grid xs={6}>
+              <FormControl fullWidth>
+                <TextField
+                  label={"Voimassaolo päättyy"}
+                  type={"date"}
+                  inputProps={{
+                    name: 'challengeTo',
+                    id: 'challengeTo',
+                  }}
+                  onChange={this.handleChange('to')} 
+                  value={this.state.to} />
+              </FormControl>
+            </Grid>
+            <Grid xs={12}>
+              {this.state.title && this.state.description && <Mutation 
+                mutation={MUTATION_CREATE_NEW_CHALLENGE}
+                refetchQueries={['GetChallenges' ]}
+                onCompleted={this.clearState}
+                onError={error => `Error! ${error.message}`}
+              >
+                {createItem => (
+                  <Button 
+                    style={{margin: "20px auto", display: "block"}}
+                    onClick={() =>  {createItem({
+                      variables: {
+                        challenge: {
+                          userId: localStorage.getItem('id'),
+                          title: this.state.title,
+                          description: parseInt(this.state.description),
+                          from: this.state.from,
+                          to: this.state.to
+                        }
                       }
-                    }
-                  })}}
-                  variant="contained" color="primary">
+                    })}}
+                    variant="contained" color="primary">
                         Tallenna
-                </Button>
-              )}
-            </Mutation>}
+                  </Button>
+                )}
+              </Mutation>}
+            </Grid>
           </Grid>
         </React.Fragment>
       )

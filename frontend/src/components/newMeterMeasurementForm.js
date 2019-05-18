@@ -29,52 +29,58 @@ export default class NewMeterMeasurement extends React.Component {
       `;
       return (
         <React.Fragment>
-          <Grid item container direction={"column"} xs={12} md={4}>
-            <h1>Uusi mittarilukema</h1>
-            <FormControl fullWidth>
-              <TextField
-                label={"Mittarilukema"}
-                type={"number"}
-                inputProps={{
-                  name: 'measurementValue',
-                  id: 'measurementValue',
-                }}
-                onChange={this.handleChange('value')} 
-                value={this.state.value} />
-            </FormControl>
-            <FormControl fullWidth>
-              <TextField
-                label={"Päivämäärä"}
-                type={"date"}
-                inputProps={{
-                  name: 'measurementDate',
-                  id: 'measurementDate',
-                }}
-                onChange={this.handleChange('date')} 
-                value={this.state.date} />
-            </FormControl>
-            {this.state.value && this.state.date && <Mutation 
-              mutation={MUTATION_CREATE_NEW_MEASUREMENT}
-              refetchQueries={['Consumptions' ]}
-              onCompleted={this.clearState}
-              onError={error => `Error! ${error.message}`}
-            >
-              {createItem => (
-                <Button 
-                  onClick={() =>  {createItem({
-                    variables: {
-                      measurement: {
-                        userId: localStorage.getItem('id'),
-                        value: parseInt(this.state.value),
-                        date: this.state.date,
+          <Grid container direction={"row"} wrap>
+            <Grid xs={6}>
+              <FormControl fullWidth>
+                <TextField
+                  label={"Mittarilukema"}
+                  type={"number"}
+                  inputProps={{
+                    name: 'measurementValue',
+                    id: 'measurementValue',
+                  }}
+                  onChange={this.handleChange('value')} 
+                  value={this.state.value} />
+              </FormControl>
+            </Grid>
+            <Grid xs={6}>
+              <FormControl fullWidth>
+                <TextField
+                  label={"Päivämäärä"}
+                  type={"date"}
+                  inputProps={{
+                    name: 'measurementDate',
+                    id: 'measurementDate',
+                  }}
+                  onChange={this.handleChange('date')} 
+                  value={this.state.date} />
+              </FormControl>
+            </Grid>
+            <Grid xs={12}>
+              {this.state.value && this.state.date && <Mutation 
+                mutation={MUTATION_CREATE_NEW_MEASUREMENT}
+                refetchQueries={['Consumptions', 'AllConsumptions']}
+                onCompleted={this.clearState}
+                onError={error => `Error! ${error.message}`}
+              >
+                {createItem => (
+                  <Button 
+                    style={{margin: "20px auto", display: "block"}}
+                    onClick={() =>  {createItem({
+                      variables: {
+                        measurement: {
+                          userId: localStorage.getItem('id'),
+                          value: parseInt(this.state.value),
+                          date: this.state.date,
+                        }
                       }
-                    }
-                  })}}
-                  variant="contained" color="primary">
+                    })}}
+                    variant="contained" color="primary">
                         Tallenna
-                </Button>
-              )}
-            </Mutation>}
+                  </Button>
+                )}
+              </Mutation>}
+            </Grid>
           </Grid>
         </React.Fragment>
       )
