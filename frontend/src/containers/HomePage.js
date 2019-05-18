@@ -4,9 +4,10 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { Grid } from '@material-ui/core';
 import { MainDrawer } from '../components';
-import TotalSavingsChart from '../components/charts/totalSavingsChart'
+import TodaysSavingsChart from '../components/charts/todaysSavingsChart'
 import SavedConsumptionForm from '../components/savedConsumptionForm'
 import Home from './Home';
+import xAxis from 'react-vis/dist/plot/axis/x-axis';
 
 export default class HomePage extends React.PureComponent {
   render() {
@@ -46,6 +47,10 @@ export default class HomePage extends React.PureComponent {
     }
   `;
 
+    var today = new Date();
+    var tomorrow = new Date();
+    tomorrow.setDate(today.getDate()+1);
+
     return (
       <Grid
         container
@@ -59,16 +64,17 @@ export default class HomePage extends React.PureComponent {
             {({ loading, error, data }) => {
               if (loading) return 'Loading...';
               if (error) return `Error! ${error.message}`;
-              return <Query query={GET_USER_CONSUMPTIONS} variables={{ id: localStorage.getItem('id'), from: "2019-05-01", to: new Date().toString() }}>
+              return <Query query={GET_USER_CONSUMPTIONS} variables={{ id: localStorage.getItem('id'), from: today.toDateString(), to: tomorrow.toDateString() }}>
                 {({ loading, error, data }) => {
                   if (loading) return 'Loading...';
                   if (error) return `Error! ${error.message}`;
                   return <React.Fragment>
-                    <TotalSavingsChart data={[{ angle: 1, label: "Hygienia", subLabel: "foo" }, { angle: 5, label: "Valaistus", subLabel: "bar" }, { angle: 2, label: "Muu", subLabel: "foobar" }]} />
-                    <SavedConsumptionForm /> 
+                    <TodaysSavingsChart data={data.getSavedConsumptions} />
+                    <SavedConsumptionForm />
                   </React.Fragment>
                 }}
               </Query>
+              
             }}
           </Query>
         </Grid>

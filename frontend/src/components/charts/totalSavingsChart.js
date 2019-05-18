@@ -4,41 +4,58 @@ import { Grid } from '@material-ui/core';
 
 export default class TotalSavingChart extends React.Component {
 
-  render() {
-    return(
-      this.props.data && <React.Fragment>
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="flex-start"
-          justify="flex-start"
-        >
-          <Grid item xs={12} md={3}>
-            <p>Säästöt alueittain</p>
-            <RadialChart
-              showLabels={true}
-              labelsAboveChildren={true}
-              animations={true}
-              padAngle={0.04}
-              innerRadius={80}
-              radius={140}
-              labelsStyle={{
-                fontSize: 14,
-                fontFamily: "Tahoma",
-                fontColor: "#FFFFFF",
-                letterSpacing: 0.4,
-                fill: "#FFF",
-                textTransform: "Uppercase"
-              }}
-              data={this.props.data}
-              width={320}
-              height={320} />
+    groupBy = key => array =>
+      array.reduce(
+        (objectsByKeyValue, obj) => ({
+          ...objectsByKeyValue,
+          [obj[key]]: (objectsByKeyValue[obj[key]] || []).concat(obj)
+        }),
+        {}
+      );
+
+    factorData = () => {
+      let data = []
+      const groupByTitle = this.groupBy('title')
+      let items = groupByTitle(this.props.data)
+      return data;
+    }
+
+    render() {
+      const data = this.factorData()
+      return(
+        this.props.data.length > 0 && <React.Fragment>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="flex-start"
+            justify="flex-start"
+          >
+            <Grid item xs={12} md={3}>
+              <p>Säästöt alueittain</p>
+              <RadialChart
+                showLabels={true}
+                labelsAboveChildren={true}
+                animations={true}
+                padAngle={0.04}
+                innerRadius={80}
+                radius={140}
+                labelsStyle={{
+                  fontSize: 14,
+                  fontFamily: "Tahoma",
+                  fontColor: "#FFFFFF",
+                  letterSpacing: 0.4,
+                  fill: "#FFF",
+                  textTransform: "Uppercase"
+                }}
+                data={data}
+                width={320}
+                height={320} />
+            </Grid>
+
+
           </Grid>
-
-
-        </Grid>
-      </React.Fragment>
-    )   
-  }
+        </React.Fragment>
+      )   
+    }
 }

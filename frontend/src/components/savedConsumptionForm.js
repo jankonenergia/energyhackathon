@@ -47,6 +47,7 @@ export default class SavedConsumptionForm extends React.Component {
             }
         }
       `;
+
       return (
         <React.Fragment>
           <h1>Säästin energiaa seuraavanlaisesti:</h1>
@@ -99,11 +100,9 @@ export default class SavedConsumptionForm extends React.Component {
             </FormControl>}
             {this.state.selectedDate && <Mutation 
               mutation={MUTATION_ADD_NEW_CONSUMPTION}
-              refetchQueries={() => { return [{ query: QUERY_CONSUMPTION_TYPES }]}}
+              refetchQueries={[{ query: QUERY_CONSUMPTION_TYPES }, 'Consumptions' ]}
               onCompleted={this.clearState}
-              onError={error => {
-                return `Error! ${error.message}`;
-              }}
+              onError={error => `Error! ${error.message}`}
             >
               {createItem => (
                 <Button 
