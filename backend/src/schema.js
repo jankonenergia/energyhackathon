@@ -76,6 +76,7 @@ const typeDefs = gql`
     userId: ID!, 
     title: String,
     description: String,
+    limit: Float,
     from: Date,
     to: Date
   },
@@ -139,6 +140,7 @@ const typeDefs = gql`
     user: User
     title: String,
     description: String,
+    limit: Float,
     from: Date,
     to: Date
   },
