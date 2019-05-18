@@ -69,7 +69,7 @@ export default class LoginForm extends React.Component {
               <TextField
                 error={errors.nickname === true}
                 id="nickname"
-                label="Username"
+                label="Käyttäjätunnus"
                 value={this.state.nickname}
                 onChange={this.handleChange('nickname')}
                 fullWidth
@@ -83,7 +83,7 @@ export default class LoginForm extends React.Component {
               <TextField
                 error={errors.password === true}
                 id="password"
-                label="Password"
+                label="Salasana"
                 value={this.state.password}
                 onChange={this.handleChange('password')}
                 margin="normal"
@@ -93,9 +93,9 @@ export default class LoginForm extends React.Component {
             </Grid>
           </Grid>
           <Button fullWidth type="submit" style={{ marginTop: '16px' }} variant="contained" color="primary">
-            Register
+            Kirjaudu
           </Button>
-          {this.props.wrongLogin && <p>Wrong username or password</p>}
+          {this.props.wrongLogin && <p>Väärä käyttäjänimi tai salasana</p>}
         </Grid>
       </form>
     );
