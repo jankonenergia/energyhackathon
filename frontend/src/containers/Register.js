@@ -39,7 +39,7 @@ export default class Register extends React.PureComponent {
         justify="center"
         style={{ minHeight: '100vh' }}
       >
-        <Grid item xs={3}>
+        <Grid item md={3} xs={9}>
           <Mutation mutation={POST_USER}>
             {(postMutation, { data, error, loading }) => {
               if (data) {
