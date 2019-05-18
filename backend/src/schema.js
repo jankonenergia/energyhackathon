@@ -137,7 +137,8 @@ const typeDefs = gql`
   type Challenge {
     _id: ID!,
     userId: ID!, 
-    user: User
+    user: User,
+    created_at: Date,
     title: String,
     description: String,
     limit: Float,
