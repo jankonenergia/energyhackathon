@@ -16,7 +16,7 @@ export default class MainWrapper extends React.PureComponent {
         wrap="nowrap"
         style={{ minHeight: '100vh' }}
       >
-        <Grid item xs={1}>
+        <Grid item xs={1} >
           <MainDrawer history={this.props.history} />
         </Grid>
         <Grid
