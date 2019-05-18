@@ -32,3 +32,9 @@ exports.getChallenges = async (userId) => {
 exports.getChallenge = async (args) => {
     return Challenge.findOne({_id: mongoose.Types.ObjectId(args._id)})
 }
+
+exports.getTopList = async (args) => {
+    let userId = mongoose.Types.ObjectId(args.userId)
+    let challengeId = mongoose.Types.ObjectId(args.challengeId)
+    
+}

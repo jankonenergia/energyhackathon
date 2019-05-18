@@ -35,8 +35,9 @@ const typeDefs = gql`
     getChallenge(_id: ID!): Challenge,
     getChallenges(userId: ID!): [Challenge],
     getConsumptionTypes: [ConsumptionType],
-    getSavedConsumptions(userId: String!, from: Date!, to: Date!): [SavedConsumption]
-    getAllSavedConsumptions(userId: String!): [SavedConsumption]
+    getSavedConsumptions(userId: String!, from: Date!, to: Date!): [SavedConsumption],
+    getAllSavedConsumptions(userId: String!): [SavedConsumption],
+    getTopList(topListInput: TopListInput!): [TopListItem]
   },
 
   """
@@ -87,6 +88,14 @@ const typeDefs = gql`
     value: Float,
     date: Date
   },
+
+  input TopListInput {
+    userId: String,
+    challengeId: String,
+    friends: [String],
+    from: Date,
+    to: Date
+  }
 
   """
   Types for Jankon Energia
@@ -161,6 +170,12 @@ const typeDefs = gql`
     consumptionType: ConsumptionType,
     value: Float,
     date: Date
+  }
+
+  type TopListItem {
+    position: Int,
+    user: User,
+    value: Float
   }
 
   """

@@ -4,7 +4,7 @@ import {logIn, createProfile, getProfile, getAllProfiles, deleteProfile, updateP
 import {getHousing, createOrUpdateHousing, removeHousing} from './actions/housingOperations'
 import {getMeasurements, createMeasurement, deleteMeasurement} from './actions/measurementOperations'
 import {getFriends, addFriend, unFriend} from './actions/friendOperations'
-import {getChallenges,getChallenge, createChallenge, removeChallenge} from './actions/challengeOperations'
+import {getChallenges,getChallenge, createChallenge, removeChallenge, getTopList} from './actions/challengeOperations'
 import {getConsumptionTypes, getConsumptionType} from './actions/consumptionTypeOperations'
 import {getSavedConsumptions, getAllSavedConsumptions, createSavedConsumption, removeSavedConsumption} from './actions/savedConsumptionTypeOperations'
 
@@ -75,6 +75,12 @@ const resolvers = {
           throw new AuthenticationError('must authenticate')
         }
         return getAllSavedConsumptions(args)
+      },
+      getTopList: (org, args, context) => {
+        if(!context.user) {
+          throw new AuthenticationError('must authenticate')
+        }
+        return getTopList(args)
       }
     },
     Mutation: {
