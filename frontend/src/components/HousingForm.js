@@ -60,7 +60,6 @@ export default class HousingForm extends React.Component {
         } noValidate autoComplete="false">
         <Grid
           container
-          spacing={0}
           direction="column"
           alignItems="center"
           justify="center"

@@ -9,7 +9,12 @@ import Home from './Home';
 export default class MainWrapper extends React.PureComponent {
 
   componentWillMount() {
-    window.addEventListener('resize', this.forceUpdate());
+    window.addEventListener('resize', this.resized);
+  }
+
+  resized = () => {
+    console.log('resize')
+    this.forceUpdate();
   }
 
   render() {
@@ -19,14 +24,12 @@ export default class MainWrapper extends React.PureComponent {
         <React.Fragment>
           <Grid
             container
-            spacing={0}
             direction="row"
             wrap="nowrap"
-            style={{ minHeight: '100vh' }}
+            style={{ minHeight: '100vh', paddingBottom: '100px' }}
           >
             <Grid
               container
-              spacing={0}
               direction="column"
               alignItems="center"
               justify="center"
@@ -44,23 +47,22 @@ export default class MainWrapper extends React.PureComponent {
     return (
       <Grid
         container
-        spacing={0}
         direction="row"
         wrap="nowrap"
         style={{ minHeight: '100vh' }}
       >
-        <Grid item xs={1} >
+        <Grid item xs={2} lg={1} >
           <MainDrawer history={this.props.history} />
         </Grid>
         <Grid
           container
-          spacing={0}
           direction="column"
           alignItems="center"
           justify="center"
           style={{ minHeight: '100vh' }}
           item
-          xs={11}
+          xs={10}
+          lg={11}
         >
           {this.props.children}
         </Grid>
