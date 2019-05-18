@@ -35,8 +35,8 @@ const typeDefs = gql`
     getChallenge(_id: ID!): Challenge,
     getChallenges(userId: ID!): [Challenge],
     getConsumptionTypes: [ConsumptionType],
-    getSavedConsumptions(userId: ID!, from: Date!, to: Date!): [SavedConsumption]
-    getAllSavedConsumptions(userId: ID!): [SavedConsumption]
+    getSavedConsumptions(userId: String!, from: Date!, to: Date!): [SavedConsumption]
+    getAllSavedConsumptions(userId: String!): [SavedConsumption]
   },
 
   """

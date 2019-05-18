@@ -20,9 +20,18 @@ export default class TodaysSavingsChart extends React.Component {
     return data
   }
 
+  factorMeasurements = () => {
+    let data = 0
+    this.props.measurements.map((item) => {
+      data += item.value
+    })
+    return data
+  }
+
   render() {
 
     const data = this.factorData()
+    const measurements = this.factorMeasurements()
     return(
       this.props.data && <React.Fragment>
         <Grid
@@ -34,11 +43,12 @@ export default class TodaysSavingsChart extends React.Component {
         >
           <Grid item xs={12} md={3}>
             <p>Säästöt Tänään ({data.toFixed(2)}kWh)</p>
-            <XYPlot width={300} height={300}>
+            <XYPlot width={300} height={300} stackBy="y">
               <VerticalGridLines />
               <HorizontalGridLines />
               <YAxis />
               <VerticalBarSeries data={[{x: 1, y: data}]} />
+              <VerticalBarSeries data={[{x: 1, y: measurements}]} />
             </XYPlot>
           </Grid>
         </Grid>

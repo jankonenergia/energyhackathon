@@ -22,6 +22,9 @@ export default class HomePage extends React.PureComponent {
           amountType
         },
         value
+      },
+      measurements(userId: $id, from: $from, to: $to) {
+        value
       }
     }
     `;
@@ -69,7 +72,7 @@ export default class HomePage extends React.PureComponent {
                   if (loading) return 'Loading...';
                   if (error) return `Error! ${error.message}`;
                   return <React.Fragment>
-                    <TodaysSavingsChart data={data.getSavedConsumptions} />
+                    <TodaysSavingsChart data={data.getSavedConsumptions} measurements={data.measurements} />
                     <SavedConsumptionForm />
                     <NewChallengeForm />
                     <NewMeasurementForm />
