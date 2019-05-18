@@ -72,3 +72,5 @@ currently, passwore hash and JWT secret comes from the following environment var
 ```PROFILE_HASH_SECRET```
 
 (There will be an mutation to create a new user from the graphql api)
+
+for more info, check the backend, it displays the schema from all graphql queries.
