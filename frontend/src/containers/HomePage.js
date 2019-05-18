@@ -13,7 +13,7 @@ export default class HomePage extends React.PureComponent {
   
   render() {
     const GET_USER_CONSUMPTIONS = gql`
-    query Consumptions($id: ID!, $from: Date!, $to: Date!) {
+    query Consumptions($id: String!, $from: Date!, $to: Date!, $yesterday: Date!) {
       getSavedConsumptions(userId: $id, from: $from, to: $to) {
         consumptionType {
           title,
@@ -23,7 +23,7 @@ export default class HomePage extends React.PureComponent {
         },
         value
       },
-      measurements(userId: $id, from: $from, to: $to) {
+      measurements(userId: $id, from: $yesterday, to: $to) {
         value
       }
     }
@@ -53,7 +53,9 @@ export default class HomePage extends React.PureComponent {
 
     var today = new Date();
     var tomorrow = new Date();
+    var yesterday = new Date();
     tomorrow.setDate(today.getDate()+1);
+    yesterday.setDate(today.getDate()-1);
 
     return (
       <Grid
@@ -67,7 +69,7 @@ export default class HomePage extends React.PureComponent {
             {({ loading, error, data }) => {
               if (loading) return 'Loading...';
               if (error) return `Error! ${error.message}`;
-              return <Query query={GET_USER_CONSUMPTIONS} variables={{ id: localStorage.getItem('id'), from: today.toDateString(), to: tomorrow.toDateString() }}>
+              return <Query query={GET_USER_CONSUMPTIONS} variables={{ id: localStorage.getItem('id'), from: today.toDateString(), to: tomorrow.toDateString(), yesterday: yesterday.toDateString() }}>
                 {({ loading, error, data }) => {
                   if (loading) return 'Loading...';
                   if (error) return `Error! ${error.message}`;

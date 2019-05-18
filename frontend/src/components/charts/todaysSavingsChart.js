@@ -21,11 +21,13 @@ export default class TodaysSavingsChart extends React.Component {
   }
 
   factorMeasurements = () => {
-    let data = 0
-    this.props.measurements.map((item) => {
-      data += item.value
-    })
-    return data
+    let sorted = this.props.measurements.sort ( (a, b) => new Date(a.date) - new Date(b.date));
+    if(sorted && sorted.length > 0) {
+      let data = sorted[1].value - sorted[0].value
+      return data
+    } else {
+      return 0
+    }
   }
 
   render() {
@@ -47,8 +49,8 @@ export default class TodaysSavingsChart extends React.Component {
               <VerticalGridLines />
               <HorizontalGridLines />
               <YAxis />
-              <VerticalBarSeries data={[{x: 1, y: data}]} />
               <VerticalBarSeries data={[{x: 1, y: measurements}]} />
+              <VerticalBarSeries data={[{x: 1, y: data}]} />
             </XYPlot>
           </Grid>
         </Grid>
