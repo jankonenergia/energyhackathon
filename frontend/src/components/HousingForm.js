@@ -67,7 +67,7 @@ export default class HousingForm extends React.Component {
           style={{ minHeight: '100vh' }}
         >
           <Grid container spacing={16} direction="row">
-            <Grid item xs={6}>
+            <Grid item md={6}>
               <TextField
                 error={errors.address === true}
                 id="address"
@@ -78,7 +78,7 @@ export default class HousingForm extends React.Component {
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item md={6}>
               <TextField
                 error={errors.postalCode === true}
                 id="postalCode"
@@ -90,7 +90,7 @@ export default class HousingForm extends React.Component {
               />
             </Grid>
           </Grid>
-          <Grid item xs={12} style={{width: '100%', marginTop: '12px'}}>
+          <Grid item md={12} style={{width: '100%', marginTop: '12px'}}>
             <FormControl fullWidth>
               <InputLabel htmlFor="housingtype">Housing Type</InputLabel>
               <Select

@@ -12,7 +12,7 @@ const NotFound = () => (
     justify="center"
     style={{ minHeight: '100vh' }}
   >
-    <Grid item xs={3}>
+    <Grid item md={3}>
       <p>404 Page not found</p>
       <img src={asiakunnossa} className="jankko" alt="logo" />
     </Grid>

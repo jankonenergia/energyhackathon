@@ -76,7 +76,7 @@ export default class RegisterForm extends React.Component {
           style={{ minHeight: '100vh' }}
         >
           <Grid container spacing={16} direction="row">
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <TextField
                 error={errors.fname === true}
                 id="firstname"
@@ -84,10 +84,11 @@ export default class RegisterForm extends React.Component {
                 value={this.state.fname}
                 onChange={this.handleChange('fname')}
                 margin="normal"
+                fullWidth
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <TextField
                 error={errors.lname === true}
                 id="lastname"
@@ -95,6 +96,7 @@ export default class RegisterForm extends React.Component {
                 value={this.state.lname}
                 onChange={this.handleChange('lname')}
                 margin="normal"
+                fullWidth
                 required
               />
             </Grid>
@@ -110,11 +112,12 @@ export default class RegisterForm extends React.Component {
                 fullWidth
                 margin="normal"
                 required
+                fullWidth
               />
             </Grid>
           </Grid>
           <Grid container spacing={16} direction="row">
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <TextField
                 error={errors.password === true}
                 id="password"
@@ -123,10 +126,11 @@ export default class RegisterForm extends React.Component {
                 onChange={this.handleChange('password')}
                 margin="normal"
                 type="password"
+                fullWidth
                 required
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <TextField
                 error={errors.passwordConf === true}
                 id="passwordconf"
@@ -135,6 +139,7 @@ export default class RegisterForm extends React.Component {
                 onChange={this.handleChange('passwordConf')}
                 margin="normal"
                 type="password"
+                fullWidth
                 required
               />
             </Grid>

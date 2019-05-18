@@ -3,11 +3,44 @@ import '../App.scss';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { Grid } from '@material-ui/core';
-import { MainDrawer } from '../components';
+import { MainDrawer, BottomNav } from '../components';
 import Home from './Home';
 
 export default class MainWrapper extends React.PureComponent {
+
+  componentWillMount() {
+    window.addEventListener('resize', this.forceUpdate());
+  }
+
   render() {
+    const isMobile = window.innerWidth <= 500;
+    if (isMobile) {
+      return (
+        <React.Fragment>
+          <Grid
+            container
+            spacing={0}
+            direction="row"
+            wrap="nowrap"
+            style={{ minHeight: '100vh' }}
+          >
+            <Grid
+              container
+              spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              style={{ minHeight: '100vh' }}
+              item
+              xs={12}
+            >
+              {this.props.children}
+            </Grid>
+          </Grid>
+          <BottomNav history={this.props.history} />
+        </React.Fragment>
+      )
+    }
     return (
       <Grid
         container

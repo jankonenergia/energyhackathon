@@ -38,7 +38,7 @@ export default class Login extends React.PureComponent {
         justify="center"
         style={{ minHeight: '100vh' }}
       >
-        <Grid item xs={3}>
+        <Grid item md={3}>
           <Mutation mutation={LOGIN_USER} >
             {(postLogin, { data, error, loading }) => {
               if (loading) return <p>Loading...</p>;
