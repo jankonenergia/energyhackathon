@@ -98,7 +98,7 @@ export default class NewChallengeForm extends React.Component {
                         challenge: {
                           userId: localStorage.getItem('id'),
                           title: this.state.title,
-                          description: parseInt(this.state.description),
+                          description: this.state.description,
                           from: this.state.from,
                           to: this.state.to
                         }
