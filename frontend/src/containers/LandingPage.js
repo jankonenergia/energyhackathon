@@ -1,5 +1,5 @@
 import React from 'react';
-import asiakunnossa from '../images/asiakunnossa.gif';
+import asiakunnossa from '../images/logo.png';
 import '../App.scss';
 import Person from '../Person';
 import { Button } from '@material-ui/core';
@@ -17,9 +17,11 @@ export default class LandingPage extends React.PureComponent {
         </header>
         <div className="container">
           <div className="query">
-            <Person goToRegister={() => this.props.history.push('/register')} />
+            <h1>Jankon Energia</h1>
+            <img src={asiakunnossa} style={{height: "320px"}} alt="logo" />
+            <p>Asia kunnossa.</p>
             <br />
-            <img src={asiakunnossa} className="jankko" alt="logo" />
+            <Person goToRegister={() => this.props.history.push('/register')} goToLogin={() => this.props.history.push('/login')}/>
           </div>
         </div>
       </div>

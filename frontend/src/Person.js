@@ -18,7 +18,7 @@ const Person = (props) => (
       if (error) return `Error! ${error.message}`;
 
       return (
-        data.me ? <p>Hello, {data.me.firstName}!</p> : <React.Fragment><p>Connection established</p><br /> <Button onClick={() => props.goToRegister()} color="primary" variant="contained">Register</Button></React.Fragment>
+        data.me ? <p>Hello, {data.me.firstName}!</p> : <React.Fragment><Button onClick={() => props.goToRegister()} color="primary" variant="contained">Rekisteröidy</Button><br /><br /><Button onClick={() => props.goToLogin()} color="primary" variant="contained">Kirjaudu</Button></React.Fragment>
       );
     }}
   </Query>

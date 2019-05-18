@@ -4,7 +4,6 @@ import '../App.scss';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag'
 import LoginForm from '../components/LoginForm';
-
 export default class Login extends React.PureComponent {
 
   state = {
