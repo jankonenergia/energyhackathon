@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid } from '@material-ui/core';
-import { FormControl, InputLabel, Select, MenuItem, TextField, Button } from '@material-ui/core';
-import { Mutation, Query } from 'react-apollo';
+import { FormControl, TextField, Button } from '@material-ui/core';
+import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag'
 export default class NewChallengeForm extends React.Component {
 
