@@ -66,4 +66,11 @@ This resolves as:
 
 if you want to create a new token, just use ```jankonenergia``` as the secret (suprise suprise! - well at the least for now)
 
+currently, passwore hash and JWT secret comes from the following environment variables
+
+```PROFILE_JWT_SECRET```
+```PROFILE_HASH_SECRET```
+
 (There will be an mutation to create a new user from the graphql api)
+
+for more info, check the backend, it displays the schema from all graphql queries.

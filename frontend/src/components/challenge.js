@@ -82,7 +82,11 @@ class ChallengeCard extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>Method:</Typography>
+            <Typography paragraph><ol>
+              <li>Turku Energyhackathon - 321 kWh</li>
+              <li>Toni Iltanen - 221 kWh</li>
+              <li>Seppo Säästäjä - 191 kWh</li>
+              </ol></Typography>
           </CardContent>
         </Collapse>
       </Card>

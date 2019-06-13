@@ -67,7 +67,8 @@ export default class HomePage extends React.PureComponent {
         direction="row"
         spacing={16}
         alignItems="left"
-        justify="center"	  
+        justify="center"
+        style={{overflow: 'hidden'}}
       >
         <Query query={GET_USER} variables={{ id: localStorage.getItem('id') }}>
           {({ loading, error, data }) => {
